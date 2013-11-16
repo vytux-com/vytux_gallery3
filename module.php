@@ -253,6 +253,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 			</style>
 			<div id="page_help">', help_link('add_album', $this->getName()), '</div>
 			<form name="gallery" method="post" action="#">
+				',WT_Filter::getCsrf(),'
 				<input type="hidden" name="save" value="1">
 				<input type="hidden" name="block_id" value="', $block_id, '">
 				<table id="faq_module">
