@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2013 Nigel Osborne and kiwtrees.net. All rights reserved.
+**********
+Simpl_gallery3 uses the jquery-based "Galleria" script, from http://galleria.io/ 
+Galleria 1.2.9 is included in this module. No additional downloads are required,
+ though additional themes are available from Galleria if you require them.
+**********
+-->
+<html  lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simpl_add-ons ReadMe file</title>
+<script>
+addon	= "Simpl_gallery3";
+ver 	= "1.4.3";
+</script>
+<style type="text/css">
+	html {background-color: #fffff0;}
+	body {background-color: #fff; box-shadow: 5px 0 8px #ccc, -5px 0 8px #ccc; color: #444; font-family: sans-serif; font-size: 90%; line-height:1.5; margin:0 auto; padding:20px; width:80%;}
+	header {position: fixed; top: 0; width: 80%; background: #fff; margin: 0 auto;}
+	footer {background-color: #fffff0; font-size: 10px; padding:6px; border: 1px solid #ddd; opacity:0.75; overflow:auto;}
+	a {color: #4682B4; font-weight: normal; text-decoration: none;}
+	a:hover {color: #4682B4;}
+	a img {border:none;}
+	footer a {color:#555;}
+	img.left {float:left;}
+	img.right {float:right; margin-left:20px;}
+	h1 {font-size:1.9em;}
+	h2 {font-size:1.5em; color: #4682B4;}
+	h3 {font-size:1.1em;}
+	h4 {font-size:0.95em;}
+	ol {-webkit-margin-before:0; -webkit-padding-start: 0;}
+	ol li li{list-style-type:lower-alpha;}
+	ul {-webkit-padding-start:0; font-weight:900;}
+	li {line-height:150%; font-weight:normal; margin:0 0 10px 40px;}
+	dl dt {font-weight: 900;}
+	textarea {background-color:#eee; width:95%; padding:10px; min-height:120px; outline:none; resize:none; overflow:auto;}
+	table {border-collapse:collapse;}
+	th, td {border:1px solid #555; padding:5px;}
+	tr td:first-child{white-space:nowrap;}
+	td img {margin:10px; width:450px;}
+	#content{margin-top:275px; min-height:500px; overflow: hidden; padding:20px 20px 20px 10px; text-align:justify;}
+	.back {color: #4682B4; float:right;}
+	.topbar{border-bottom:1px solid;text-align: right;line-height: 30px;}
+	.ex_img{border:1px solid grey; max-width:100%; margin: 20px auto; display: block;}
+	.note {font-style:italic;}
+	.highlight {color:#ff0000;font-weight:900;}
+	.trade {font-size:8px;vertical-align:top;}
+	span.pointer {color:#008b00; font-style:italic;}
+	#title{font-size: 1.9em; font-weight: normal; text-align: center; line-height: 30px; width: 80%;}
+	nav {background: #fff; border-bottom: 3px solid #4682B4; overflow: hidden; padding:0; margin:0; text-transform: uppercase;}
+	nav label {background:#ddd; border: 1px solid #ddd; border-bottom: 0; float:left; height:40px; line-height:40px; margin-left:1px; padding:0 20px; text-decoration:none;}
+	nav label:first-child {margin-left:0;}
+	nav label:hover {background: #fff url(readme_images/arrow_up.png) no-repeat center bottom; color:#4682B4;}
+	input {display:none;}
+	div.tab{display: none;}
+	#describe:checked ~ #content div#tab_describe,#require:checked ~ #content div#tab_require,#support:checked ~ #content div#tab_support,#install:checked ~ #content div#tab_install, #setup:checked ~ #content div#tab_setup,#upgrading:checked ~ #content div#tab_upgrading,#translation:checked ~ #content div#tab_translation, #use:checked ~ #content div#tab_use, #faq:checked ~ #content div#tab_faq {display:block;}
+	#describe:checked ~ header label#label_describe,#require:checked ~ header label#label_require,#support:checked ~ header label#label_support,#install:checked ~ header label#label_install,#setup:checked ~ header label#label_setup,#upgrading:checked ~ header label#label_upgrading,#translation:checked ~ header label#label_translation,#use:checked ~ header label#label_use, #faq:checked ~ header label#label_faq {color: #4682B4; background: #ddd url(readme_images/arrow_up.png) no-repeat center bottom;}
+</style>
+</head>
+<body>
+<input type="radio" id="describe" name="tab" checked="checked">
+<input type="radio" id="require" name="tab">
+<input type="radio" id="support" name="tab">
+<input type="radio" id="install" name="tab">
+<input type="radio" id="setup" name="tab">
+<input type="radio" id="upgrading" name="tab">
+<input type="radio" id="translation" name="tab">
+<input type="radio" id="faq" name="tab">
+<header>
+	<div class="topbar">Get other "Simpl" add-ons for webtrees at <a href="http://kiwitrees.net/simpl-add-ons/" title="kiwitrees.net">kiwitrees.net</a></div>
+	<img class="left" src="readme_images/simpl_1.png" alt="simpl_logo">
+	<div id="title">
+		<h3>ReadMe file</h3>
+		<h2><script>document.write(addon);</script></h2>
+		<h4>for webtrees</h4>
+	</div>
+	<nav>
+		<label for="describe" id="label_describe">Description</label>
+		<label for="require" id="label_require">Requirements</label>
+		<label for="install" id="label_install">Installation</label>
+		<label for="setup" id="label_setup">Setup</label>
+		<label for="upgrading" id="label_upgrading">Upgrading</label>
+		<label for="translation" id="label_translation">Translation</label>
+<!--		<label for="faq" id="label_faq">FAQs</label>-->
+		<label for="support" id="label_support">Support</label>
+	</nav>
+</header>
+<div id="content">
+<!-- DESCRIPTION -->
+<div class="tab" id="tab_describe">
+<p>This module is a replacement for Simpl_gallery2, which used a javascript library that is no longer actively maintained.</p>
+<p>This version uses the jquery-based "Galleria" script, from http://galleria.io/ . The current version of Galleria is included in this module. No additional downloads are required, though additional themes are available from Galleria if you require them. It offers a number of important improvements including:</p>
+<ul>
+	<li>an ability to display PDF files either with other media objects or as a separate album</li>
+	<li>it can display externally stored image sets from Flickr or Picassa Web</li>
+	<li>it comes with three default themes, two supplied by Galleria (called "Azur" and "Classic"), and an alternative "webtrees" based version ("simpl_galleria"), but there are also other themes available from the <a href="http://galleria.io/themes/" target="_blank">Galleria website</a>; and it has a "full screen" display option.</li>
+</ul>
+<img class="ex_img" src="readme_images/screenshot.png"/>
+</div>
+<!-- REQUIREMENTS -->
+<div class="tab" id="tab_require">
+This module requires webtrees version <script>document.write(ver);</script>.
+</div>
+<!-- SUPPORT -->
+<div class="tab" id="tab_support">
+Support for Simpl_add-ons is available only at the <a href="http://kiwitrees.net/forum/simpl_addons-support/" target="_blank" title="Kiwitrees forum pages">Kiwitrees forum pages.</a>
+<p>Updates and bug-fixes will be announced on the <a href="http://kiwitrees.net/category/simpl_add-ons/kiwitrees" target="_blank" title="Simpl_add-ons blog pages">Simpl_add-ons blog pages</a>, and on <a href="https://twitter.com/@kiwi3685/" target="_blank" title="Follow me on Twitter">Twitter</a>.</p>
+</div>
+<!-- INSTALLATION -->
+<div class="tab" id="tab_install">
+	<img class="ex_img right" src="readme_images/simpl_menu2_menu.png">
+	<ol>
+		<li>Unzip the files and upload them to the webtrees/modules_v<span class="highlight">X</span>/ folder on your web server. (Note: "<span class="highlight">X</span>" = "3" at the time of writing this, but may change in future releases)</li>
+		<li>Login to webtrees as administrator, go to <span class="pointer">Administration<img src="readme_images/arrow_right.png"/>Modules</span>, and find the module. It will be called "<script>document.write(addon);</script>". Check it has a tick for "Enabled"</li>
+		<li>Next go to the "Menus" tab. Set the access level and position for the menu item to suit your preference. It will probably have defaulted to "Show only to managers".</li>
+		<li>Finally click SAVE, to complete the basic installation. </li>
+	</ol>
+	<p>If you now refresh your Administration page you will see a new menu item near the bottom, as shown to the right here. You will need to use that during the "Setup" part of the installation process.</p>
+</div>
+<!-- SETUP -->
+<div class="tab" id="tab_setup">
+<p>There are three main areas requiring setup before this module can be used; uploading images, creating display pages for them, and some adjustments to the menu options. There are also a couple of optional changes to consider.</p>
+<p>It is important to upload at least some images, and create the media folder for them BEFORE you move on to create the album display page for them.</p>
+<ol>
+	<li>Upload images
+		<ol style="list-style-type:lower-alpha;">
+			<li>Using <b>webtrees'</b> "Upload media files" option start uploading your images <span class="pointer">(Administration<img src="readme_images/arrow_right.png"/>Upload media files)</span>. In the box "Folder name on server" enter a name for a media sub folder where you want to store these images. The <script>document.write(addon);</script> module will display all images from one media folder on a single page.</li>
+			<li>During the upload, or later by editing the image details, you can add a title (will be displayed to the right of the full size image on display); a note (will be displayed below the title ); or link the image to one or more individuals (these will be listed to the right of the display, above any note).</li> 
+			<li>If you are not linking these images to any individual, fact or event in your family tree, then it is also necessary to edit (even if you change nothing) and save each one after the upload, in order to register them in the database.</ol>
+	</li>
+	<li>Create one display page or "album" for each media sub-folder created.
+		<ol style="list-style-type:lower-alpha;">
+			<li>These are stored in the webtrees database, as "block settings". They are created by going to the "<script>document.write(addon);</script>" menu option in Administration (<span class="pointer">Administration<img src="readme_images/arrow_right.png"/><script>document.write(addon);</script></span>) then click on "Add album to gallery" to display the following screen.</li>
+			<div style="padding:20px;text-align:center;"><img style="border:1px solid grey;" src="readme_images/page_2.png"></div>
+			<li>Give each album a title. Remember this will be used as both the menu item for this album and the its display tab. It is important therefore to keep these titles short.</li>
+			<li>Add an (optional) description for the album page. This might describe the purpose of the album, or some explanation of the images. It can be any length, but long texts will force the image display further down the page, so might be best limited to three or four lines at the most.</li> 
+			<li>Select the media folder containing this group of images, as created in the preceding section.</li>
+			<li>Set the access level, to determine what users can see this album. This is in addition to any existing privacy controls that might be in place for individual images if they are linked to people on your family tree.</li>
+			<li>Choose which languages to display this page for. This is the same as other similar options throughout webtrees. Select NONE of the available languages if you want it to display in ALL languages. Only select single languages if you are also planning to offer a similar translated version for other languages.</li>
+			<li>Set the Album position, relative to any other albums you might have already created. This determines where on both the menu list and tabs this album appears. It can be changed later by simply using the "drag'n drop" feature of the album list on the <script>document.write(addon);</script> administration screen. The first item will also be the default when the main "Gallery" menu items is clicked.</li>
+			<li>Use "Album visibility" to set if this album if to be seen when viewing all family trees on your site, or just the current one.</li>
+			<li>Click "Save" to complete this process and create your album page.
+		</ol>	
+	</li>
+	<div style="padding:20px;text-align:center;"><img style="border:1px solid grey;" src="readme_images/page_1.png"></div>
+	<li>Optional changes
+		<ol style="list-style-type:lower-alpha;">
+			<li>Gallery page title: by default set to "Picture galleries", this can be changed at row 627 of <script>document.write(addon);</script>/module.php.</li>
+			<li>Menu item title: this is taken from the title of the module. By default it is "Gallery". That can be changed in <script>document.write(addon);</script>/module.php, at row 37.</li>
+			<li>Menu item icons: this module uses different icons for each theme, stored in the modules <i>themes/webtrees (or clouds, colors, xenea etc)</i> folder. If you want to use a different image, simply replace the one provided with your own, of an appropriate size for your preferred theme, but keeping the name the same.</li>
+			<li>General design of fonts, colors, etc: change these in all or any of the <script>document.write(addon);</script>/themes/webtrees (or clouds, colors, xenea etc)/style.css file.</li>
+			<li><b>There are TWO types of themes in use in this module.</b> The one controlled by the contents of the <i>themes/webtrees (or clouds, colors, xenea etc)</i> folder controls the overall container for the gallery and the menu images in each of the webtrees themes. These are switched automatically when you change the main webtrees theme. In addition, there is the Galleria theme that controls the actual image display (the part with the black background in sample images here). This module includes three default themes for this, two supplied by Galleria (called "Azur" and "Classic"), and an alternative "webtrees" based version ("simpl_galleria"), but there are also other themes available from the <a href="http://galleria.io/themes/" target="_blank">Galleria website</a>. To switch between the "Azur", "Classic" and "Simpl_galleria" change line 501 of <script>document.write(addon);</script>/module.php. To add other Galleria themes, download them from their website (Note: some of theirs need to be paid for), and install it in the <script>document.write(addon);</script>/galleria/themes/ folder; then enable them by the same modification to line 501 of module.php.
+		</ol>
+	</li>
+</div>
+<!-- UPGRADING -->
+<div class="tab" id="tab_upgrading">
+	<p>Because this is a major change to the Simpl_gallery2 module <b>it is necessary to install it as a completely new module</b>. Do not just over-write simpl_gallery2. That will not work.</p>
+	<p>Install <script>document.write(addon);</script> as a new module following the <b>Installation</b> instructions, then recreate your albums using copy / paste for all the items such as titles, descriptions etc. Leave simpl_gallery2 in place and operating until you are satisfied that <script>document.write(addon);</script> is working as you want it. Then you can delete all simpl_gallery2 files. Finally visit <span class="pointer">Administration<img src="readme_images/arrow_right.png"/>Modules</span> and look for "simpl_gallery2". If you have deleted the files and folder, it will have a red notice which you can click on (then click "save" at the foot of the page) to delete the database entries.</p>
+</div>
+<!-- Translation -->
+<div class="tab" id="tab_translation">
+Where possible <script>document.write(addon);</script> uses existing webtrees language items. These will therefore translate automatically wherever they are used.
+<p>Any new language items use the same "WT_I18N::translate()" format but require additional translation files. Some might be included with this module in it's "language" folder. For languages NOT included you have two options:</p>
+<ol>
+	<li>You can translate them yourself using the process and any of the options in webtrees "custom translation" feature described here: <a href="http://wiki.webtrees.net/Custom_Translation" title="webtrees WIKI - Custom Translation">Wiki: Custom translation</a>, or </li>
+	<li>you can email me the necessary translations. I will include them in the next release and if you wish supply you an immediate update for your own use. You can supply me the translation either in the form of a .po and compiled .mo file, or you can use the blank "en_US.po" file supplied in the modules' language/po_files/ folder. That is a simple text file you can edit in any text editor. Just add your translation for each item in it's empty "msgstr" line.
+		<ul>NOTES:
+			<li>Please be specific about your translation. Options such as "you can use xxxx or yyyy" to translate this" are not helpful. I don't have the knowledge of your language to make such a choice.</li>
+			<li>Remember that certain phrases might need plural as well as singular versions or other variants.</li>
+			<li>Some texts have a comment "Do not translate. Already in webtrees core." Do not translate those.</li>
+		</ul>
+	</li>
+</ol>
+<p>If you want to use a different set of translations to any supplied with this module you can do so either by changing the supplied .po/.mo files, or by deleting them and using your own custom translation file as described in 1. above.</p>
+</div>
+<!-- FAQs -->
+<div class="tab" id="tab_faq">
+</div>
+</div>
+<footer>
+	<a href="http://www.kiwitrees.net">
+		<div style='float:left;'>
+			This add-on for webtrees<span class="trade">&trade;</span> is provided by <b>kiwitrees</b><span class="trade">&trade;</span>
+		</div>
+		<div style='float:right;'>
+			<b>kiwitrees</b><span class="trade">&trade;</span> is a division of <b>Solution Associates Limited</b>
+		</div>
+	</a>
+</footer>
+</body>
+</html>
