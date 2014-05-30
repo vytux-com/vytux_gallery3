@@ -725,7 +725,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 					}
 				}
 			}
-			if (WT_USER_CAN_ACCESS || $media_links != '') {
+			if (WT_USER_CAN_ACCESS || (isset($media_links) && $media_links != '')) {
 				$html=
 					'<div id="links_bar"></div>'.
 					'<div id="galleria" style="width:80%;">';
