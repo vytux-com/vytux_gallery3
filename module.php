@@ -502,7 +502,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 	}
 
 	private function getJavaScript($item_id) {
-		$theme = "azur";// alternatives: "classic", "simpl_galleria"
+		$theme = "classic";// alternatives: "azur", "simpl_galleria"
 		$plugin=get_block_setting($item_id, 'plugin');
 		$js='Galleria.loadTheme("'.WT_STATIC_URL.WT_MODULES_DIR.$this->getName().'/galleria/themes/'.$theme.'/galleria.'.$theme.'.js");';
 			switch ($plugin) {
@@ -630,7 +630,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 		$controller
 			->setPageTitle(WT_I18N::translate('Picture galleries'))
 			->pageHeader()
-			->addExternalJavaScript(WT_STATIC_URL.WT_MODULES_DIR.$this->getName().'/galleria/galleria-1.2.9.min.js')
+			->addExternalJavaScript(WT_STATIC_URL.WT_MODULES_DIR.$this->getName().'/galleria/galleria-1.4.2.min.js')
 			->addExternalJavaScript(WT_STATIC_URL.WT_MODULES_DIR.$this->getName().'/galleria/plugins/flickr/galleria.flickr.min.js')
 			->addExternalJavaScript(WT_STATIC_URL.WT_MODULES_DIR.$this->getName().'/galleria/plugins/picasa/galleria.picasa.min.js')
 			->addInlineJavaScript($this->getJavaScript($item_id));
