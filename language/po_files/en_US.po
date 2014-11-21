@@ -138,7 +138,7 @@ msgid ""
 msgstr ""
 
 #: module.php:33
-msgid "Vytux_gallery3"
+msgid "Vytux Gallery 3"
 msgstr ""
 
 #: module.php:37

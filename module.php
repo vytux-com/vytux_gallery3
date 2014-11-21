@@ -55,7 +55,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 
 	// Extend class WT_Module
 	public function getTitle() {
-		return WT_I18N::translate('Vytux_gallery3');
+		return WT_I18N::translate('Vytux Gallery 3');
 	}
 
 	public function getMenuTitle() {
