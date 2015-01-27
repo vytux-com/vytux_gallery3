@@ -264,13 +264,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 			if (array_key_exists('ckeditor', WT_Module::getActiveModules())) {
 				ckeditor_WT_Module::enableEditor($controller);
 			}
-			echo '<style>
-				#webtrees-div, #flickr-div, #picasa-div {width:31%;margin:0 1%;border:1px solid;float:left;height:90px;}
-				#webtrees-div p, #flickr-div p, #picasa-div p{margin:0;}
-				#webtrees-div select{margin:0 5px;width:95%;}
-				.vis{margin:0;padding:5px;}
-				.vis input{margin:3px;width:90%;}
-			</style>'; ?>
+			?>
 			
 			<ol class="breadcrumb small">
 				<li><a href="admin.php"><?php echo WT_I18N::translate('Administration'); ?></a></li>
