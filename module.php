@@ -779,42 +779,47 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 			->addExternalJavaScript(WT_STATIC_URL.WT_MODULES_DIR.$this->getName().'/galleria/plugins/flickr/galleria.flickr.min.js')
 			->addExternalJavaScript(WT_STATIC_URL.WT_MODULES_DIR.$this->getName().'/galleria/plugins/picasa/galleria.picasa.min.js')
 			->addInlineJavaScript($this->getJavaScript($item_id));
-		$html=
-			'<div id="gallery-page">'.
-			'<div id="gallery-container">'.
-			'<h2>'.$controller->getPageTitle().'</h2>'.
-			$gallery_header_description.
-			'<div style="clear:both;"></div>'.
-			'<div id="gallery_tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">'.
-			'<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">';
-			$item_list=$this->getAlbumList();
-			foreach ($item_list as $item) {
-				$languages=get_block_setting($item->block_id, 'languages');
-				if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item->album_access>=WT_USER_ACCESS_LEVEL) {
-					$html.='<li class="ui-state-default ui-corner-top'.($item_id==$item->block_id ? ' ui-tabs-selected ui-state-active' : '').'">'.
-						'<a href="module.php?mod='.$this->getName().'&amp;mod_action=show&amp;album_id='.$item->block_id.'">'.
-						'<span title="'.WT_I18N::translate($item->album_title).'">'.WT_I18N::translate($item->album_title).'</span></a></li>';
-				}
-			}
-		$html.=
-			'</ul>'.
-			'<div id="outer_gallery_container" style="padding: 1em;">';
-				foreach ($item_list as $item) {
-					$languages=get_block_setting($item->block_id, 'languages');
-					if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item_id==$item->block_id && $item->album_access>=WT_USER_ACCESS_LEVEL) {
-						$item_gallery='<h4>'.WT_I18N::translate($item->album_description).'</h4>'.$this->mediaDisplay($item->album_folder_w, $item_id);
-					}
-				}
-				if (!isset($item_gallery)) {
-					$html.='<h4>'.WT_I18N::translate('Image collections related to our family').'</h4>'.$this->mediaDisplay('//', $item_id);
-				} else {
-					$html.=$item_gallery;
-				}
-		$html.=
-			'</div>'. //close #outer_gallery_container
-			'</div>'. //close #gallery_tabs
-			'</div>'; //close #gallery-container
-		echo $html;
+		?>
+		<div id="gallery-page">
+			<div id="gallery-container">
+				<h2><?php echo $controller->getPageTitle(); ?></h2>
+				<?php echo $gallery_header_description; ?>
+				<div style="clear:both;"></div>
+				<div id="gallery_tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+					<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+					<?php 
+						$item_list=$this->getAlbumList();
+						foreach ($item_list as $item) {
+							$languages=get_block_setting($item->block_id, 'languages');
+							if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item->album_access>=WT_USER_ACCESS_LEVEL) { ?>
+								<li class="ui-state-default ui-corner-top <?php echo ($item_id==$item->block_id ? ' ui-tabs-selected ui-state-active' : ''); ?>">
+									<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=show&amp;album_id=<?php echo $item->block_id; ?>">
+										<span title="<?php echo WT_I18N::translate($item->album_title); ?>"><?php echo WT_I18N::translate($item->album_title); ?></span>
+									</a>
+								</li>
+							<?php 
+							}
+						} 
+					?>
+					</ul>
+					<div id="outer_gallery_container" style="padding: 1em;">
+					<?php 
+						foreach ($item_list as $item) {
+							$languages=get_block_setting($item->block_id, 'languages');
+							if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item_id==$item->block_id && $item->album_access>=WT_USER_ACCESS_LEVEL) {
+								$item_gallery='<h4>'.WT_I18N::translate($item->album_description).'</h4>'.$this->mediaDisplay($item->album_folder_w, $item_id);
+							}
+						}
+						if (!isset($item_gallery)) {
+							echo '<h4>'.WT_I18N::translate('Image collections related to our family').'</h4>'.$this->mediaDisplay('//', $item_id);
+						} else {
+							echo $item_gallery;
+						}
+					?>
+					</div>
+				</div>
+			</div>
+			<?php
 	}
 
 	// Print the gallery display
