@@ -260,7 +260,6 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 						}
 					};
 					jQuery("#galleryForm").on("submit", function() {
-						alert("test");
 						jQuery("#fs_album_folder_w").prop("disabled", false);
 						jQuery("#fs_album_folder_f").prop("disabled", false);
 						jQuery("#fs_album_folder_p").prop("disabled", false);
