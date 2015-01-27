@@ -847,10 +847,10 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 					$gallery_links='';
 					if (WT_USER_CAN_EDIT) {
 						$gallery_links.='<div class="edit_links">';
-							$gallery_links.='<div class="image_option"><a href="'. $media->getHtmlUrl(). '"><img src="'.WT_MODULES_DIR.$this->getName().'/'.WT_THEME_URL.'edit.png" title="'.WT_I18N::translate('Edit').'"></a></div>';
+							$gallery_links.='<div class="image_option"><a href="'. $media->getHtmlUrl(). '"><img src="'.WT_MODULES_DIR.$this->getName().'/themes/'.Theme::theme()->themeId().'/edit.png" title="'.WT_I18N::translate('Edit').'"></a></div>';
 							if (WT_USER_GEDCOM_ADMIN) {
 								if (array_key_exists('GEDFact_assistant', WT_Module::getActiveModules())) {
-									$gallery_links.='<div class="image_option"><a onclick="return ilinkitem(\''.$rowm['m_id'].'\', \'manage\')" href="#"><img src="'.WT_MODULES_DIR.$this->getName().'/'.WT_THEME_URL.'link.png" title="'.WT_I18N::translate('Manage links').'"></a></div>';
+									$gallery_links.='<div class="image_option"><a onclick="return ilinkitem(\''.$rowm['m_id'].'\', \'manage\')" href="#"><img src="'.WT_MODULES_DIR.$this->getName().'/themes/'.Theme::theme()->themeId().'/link.png" title="'.WT_I18N::translate('Manage links').'"></a></div>';
 								}
 							}
 						$gallery_links.='</div><hr>';// close .edit_links
@@ -886,7 +886,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 		if ($images) {
 			$html.=$images.
 				'</div>'.// close #galleria
-				'<a id="copy" href="http://galleria.io/" target="_blank">Display by Galleria</a>'.// gallery.io attribution
+				'<a id="copy" href="http://galleria.io/">Display by Galleria</a>'.// gallery.io attribution
 				'</div>'.// close #page
 				'<div style="clear: both;"></div>';
 		} else {
