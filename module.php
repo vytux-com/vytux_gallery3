@@ -259,6 +259,12 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 							jQuery("#fs_album_folder_p").prop("disabled", false);
 						}
 					};
+					jQuery("#galleryForm").on("submit", function() {
+						alert("test");
+						jQuery("#fs_album_folder_w").prop("disabled", false);
+						jQuery("#fs_album_folder_f").prop("disabled", false);
+						jQuery("#fs_album_folder_p").prop("disabled", false);
+					});
 				');
 			
 			if (array_key_exists('ckeditor', WT_Module::getActiveModules())) {
@@ -273,7 +279,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 				<li class="active"><?php echo $controller->getPageTitle(); ?></li>
 			</ol>
 
-			<form class="form-horizontal" method="POST" action="#" name="gallery">
+			<form class="form-horizontal" method="POST" action="#" name="gallery" id="galleryForm">
 				<?php echo WT_Filter::getCsrf(); ?>
 				<input type="hidden" name="save" value="1">
 				<input type="hidden" name="block_id" value="<?php echo $block_id; ?>">
@@ -572,29 +578,34 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 			<li><a href="admin_modules.php"><?php echo WT_I18N::translate('Module administration'); ?></a></li>
 			<li class="active"><?php echo $controller->getPageTitle(); ?></li>
 		</ol>
-
-		<?php // TODO: Move to internal item/page
-		if (file_exists(WT_MODULES_DIR.$this->getName().'/readme.html')) {
-			echo '<a style="color:green;float:right;padding:0 20px;" href="',WT_MODULES_DIR.$this->getName().'/readme.html" target="_blank" title="', WT_I18N::translate('Installation document'), '">', WT_I18N::translate('ReadMe'), '</a>';
-		} ?>		
-
-		<form class="form form-inline">
-			<label for="ged" class="sr-only">
-				<?php echo WT_I18N::translate('Family tree'); ?>
-			</label>
-			<input type="hidden" name="mod" value="<?php echo  $this->getName(); ?>">
-			<input type="hidden" name="mod_action" value="admin_config">
-			<?php echo select_edit_control('ged', WT_Tree::getNameList(), null, WT_GEDCOM, 'class="form-control"'); ?>
-			<input type="submit" class="btn btn-primary" value="<?php echo WT_I18N::translate('show'); ?>">
-		</form>
-
-		<p>
-			<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_edit" class="btn btn-default">
-				<i class="fa fa-plus"></i>
-				<?php echo WT_I18N::translate('Add album to gallery'); ?>
-			</a>
-		</p>
-
+		
+		<div class="row">
+			<div class="col-sm-4">
+				<form class="form form-inline">
+					<label for="ged" class="sr-only">
+						<?php echo WT_I18N::translate('Family tree'); ?>
+					</label>
+					<input type="hidden" name="mod" value="<?php echo  $this->getName(); ?>">
+					<input type="hidden" name="mod_action" value="admin_config">
+					<?php echo select_edit_control('ged', WT_Tree::getNameList(), null, WT_GEDCOM, 'class="form-control"'); ?>
+					<input type="submit" class="btn btn-primary" value="<?php echo WT_I18N::translate('show'); ?>">
+				</form>
+			</div>
+			<div class="col-sm-4 text-center">
+				<p>
+					<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_edit" class="btn btn-primary">
+						<i class="fa fa-plus"></i>
+						<?php echo WT_I18N::translate('Add album to gallery'); ?>
+					</a>
+				</p>
+			</div>
+			<div class="col-sm-4 text-right">		
+				<?php // TODO: Move to internal item/page
+				if (file_exists(WT_MODULES_DIR.$this->getName().'/readme.html')) { ?>
+					<a href="<?php echo WT_MODULES_DIR.$this->getName().'/readme.html" class="btn btn-primary">', WT_I18N::translate('ReadMe'); ?></a>
+				<?php } ?>
+			</div>
+		</div>
 		
 		<table class="table table-bordered table-condensed">
 			<thead>
