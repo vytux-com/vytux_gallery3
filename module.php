@@ -607,7 +607,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 			<div class="col-sm-4 text-right">		
 				<?php // TODO: Move to internal item/page
 				if (file_exists(WT_MODULES_DIR.$this->getName().'/readme.html')) { ?>
-					<a href="<?php echo WT_MODULES_DIR.$this->getName(); ?>/readme.html" class="btn btn-primary">
+					<a href="<?php echo WT_MODULES_DIR.$this->getName(); ?>/readme.html" class="btn btn-info">
 						<i class="fa fa-newspaper-o"></i>
 						<?php echo WT_I18N::translate('ReadMe'); ?>
 					</a>
