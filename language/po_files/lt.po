@@ -1,313 +1,266 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: vytux_gallery3\n"
-"POT-Creation-Date: 2013-08-13 09:52+1200\n"
-"PO-Revision-Date: 2014-11-21 21:38+1000\n"
+"POT-Creation-Date: 2015-01-28 14:27+1000\n"
+"PO-Revision-Date: 2015-01-28 15:02+1000\n"
 "Last-Translator: Vytautas Krivickas <vytautas.krivickas@gmail.com>\n"
 "Language-Team: Vytux webtrees <webtrees@vytux.com>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.7.1\n"
 "X-Poedit-KeywordsList: translate;noop;plural:1,2\n"
 "X-Poedit-Basepath: ..\\..\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Language: lt\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: help_text.php:33 module.php:206 module.php:447
-msgid "Add album to gallery"
-msgstr "Pridėti albumą į galeriją"
-
-#: help_text.php:34
-msgid ""
-"The gallery should contains albums. Using this option you can add album "
-"details."
-msgstr ""
-
-#: help_text.php:38 module.php:321
-msgid "Album position"
-msgstr "Albumo padėtis"
-
-#: help_text.php:39
-msgid ""
-"This field controls the order in which the gallery albums are displayed."
-msgstr ""
-
-#: help_text.php:39
-msgid ""
-"You do not have to enter the numbers sequentially. If you leave holes in the "
-"numbering scheme, you can insert other albums later. For example, if you use "
-"the numbers 1, 6, 11, 16, you can later insert albums with the missing "
-"sequence numbers. Negative numbers and zero are allowed, and can be used to "
-"insert albums in front of the first one."
-msgstr ""
-
-#: help_text.php:39 help_text.php:60 help_text.php:65
-msgid ""
-"When more than one gallery album has the same position number, only one of "
-"these albums will be visible."
-msgstr ""
-
-#: help_text.php:43 module.php:322
-msgid "Album visibility"
-msgstr "Albumo matomumas"
-
-#: help_text.php:44
-msgid ""
-"You can determine whether this album will be visible regardless of family "
-"tree, or whether it will be visible only to the current family tree."
-msgstr ""
-
-#: help_text.php:45 module.php:460
-msgid "All"
-msgstr "Visi"
-
-#: help_text.php:45
-msgid "The album will appear in all galleries, regardless of family tree."
-msgstr ""
-
-#: help_text.php:45
-msgid ""
-"The album will appear only in the currently active family trees's gallery."
-msgstr ""
-
-#: help_text.php:49
-msgid "Delete album"
-msgstr "Ištrinti albumą"
-
-#: help_text.php:50
-msgid "This option will let you delete an album from the gallery."
-msgstr ""
-
-#: help_text.php:54 module.php:191
-msgid "Edit album"
-msgstr "Redaguoti albumą"
-
-#: help_text.php:55
-msgid "This option will let you edit an album on the gallery."
-msgstr ""
-
-#: help_text.php:59
-msgid "Move album down"
-msgstr "Perkelti albumą žemyn"
-
-#: help_text.php:60
-msgid "This option will let you move an album downwards on the gallery page."
-msgstr ""
-
-#: help_text.php:60
-msgid ""
-"Each time you use this option, the position number of this album is "
-"increased by one. You can achieve the same effect by editing the album and "
-"changing the album position field."
-msgstr ""
-
-#: help_text.php:64
-msgid "Move album up"
-msgstr "Perkelti albumą aukštyn"
-
-#: help_text.php:65
-msgid "This option will let you move an album upwards on the gallery page."
-msgstr ""
-
-#: help_text.php:65
-msgid ""
-"Each time you use this option, the position number of this album is reduced "
-"by one. You can achieve the same effect by editing the album and changing "
-"the album position field."
-msgstr ""
-
-#: help_text.php:69
-msgid "Album source"
-msgstr "Albumo šaltinis"
-
-#: help_text.php:70
-msgid ""
-"Here you can either select the webtrees media folder to display in this "
-"album page, or you can set a link to a Flickr or Picasa location for your "
-"group of images.<br><em>[Such external sources must be public or they will "
-"not be viewable in webtrees.]</em><br><br>For Flickr (www.flickr.com), enter "
-"the <strong>Set</strong> number of your images, usually a long number like "
-"<strong>72157633272831222</strong>. Nothing else is required in this field."
-"<br><br>For Picassa (picasaweb.google.com) enter your user name and user "
-"album, in the format <strong>username/album</strong> like <strong>kiwi3685/"
-"NZImages</strong><br><br>The module will add these references to the correct "
-"URLs to link to your Flickr or Picasa sites."
-msgstr ""
-
-#: module.php:33
+#: module.php:54
 msgid "Vytux Gallery 3"
 msgstr "Vytux Gallery 3"
 
-#: module.php:37
+#: module.php:58
 msgid "Gallery"
 msgstr "Galerija"
 
-#: module.php:42
+#: module.php:63
 msgid "Display image galleries."
 msgstr "Rodyti paveikslų galerijas."
 
-#: module.php:114
+#: module.php:135
 msgid "Edit albums"
 msgstr "Redaguoti albumus"
 
+#: module.php:214
+msgid "Edit album"
+msgstr "Redaguoti albumą"
+
+#: module.php:229 module.php:603
+msgid "Add album to gallery"
+msgstr "Pridėti albumą į galeriją"
+
 # Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:257
+#: module.php:275 module.php:582
+msgid "Control panel"
+msgstr ""
+
+# Do not translate. Already in webtrees core.
+#: module.php:276 module.php:583
+msgid "Module administration"
+msgstr ""
+
+# Do not translate. Already in webtrees core.
+#: module.php:285
+msgid "General"
+msgstr ""
+
+# Do not translate. Already in webtrees core.
+#: module.php:289
 msgid "Title"
 msgstr ""
 
-#: module.php:259
+#: module.php:305
 msgid "Description"
 msgstr "Aprašymas"
 
-#: module.php:263
+#: module.php:321
 msgid "Source"
 msgstr "Šaltinis"
 
-#: module.php:270
+#: module.php:323
+msgid "Here you can either select the webtrees media folder to display in this album page, or you can set a link to a Flickr or Picasa location for your group of images.<br><em>[Such external sources must be public or they will not be viewable in webtrees.]</em><br><br>The module will add these references to the correct URLs to link to your Flickr or Picasa sites."
+msgstr ""
+
+#: module.php:327
+msgid "Gallery Source"
+msgstr "Galerijos šaltinis"
+
+#: module.php:332
 msgid "webtrees"
 msgstr "webtrees"
 
-#: module.php:278
-msgid "Folder name on server"
-msgstr "Aplanka ant serverio"
-
-#: module.php:287
+#: module.php:337
 msgid "Flickr"
 msgstr "Flickr"
 
-#: module.php:295
-msgid "Flickr set number"
-msgstr "Flickr numeris"
-
-#: module.php:304
+#: module.php:342
 msgid "Picasa"
 msgstr "Picasa"
 
-#: module.php:312
+#: module.php:350
+msgid "Folder name on server"
+msgstr "Aplanka ant serverio"
+
+#: module.php:365
+msgid "Flickr set number"
+msgstr "Flickr numeris"
+
+#: module.php:379
+msgid "For Flickr (www.flickr.com), enter the <strong>Set</strong> number of your images, usually a long number like <strong>72157633272831222</strong>. Nothing else is required in this field."
+msgstr ""
+
+#: module.php:386
 msgid "Picasa user/album"
 msgstr "Picasa naudotojas/albumas"
 
-#: module.php:320
+#: module.php:400
+msgid "For Picassa (picasaweb.google.com) enter your user name and user album, in the format <strong>username/album</strong> like <strong>kiwi3685/NZImages</strong>"
+msgstr ""
+
+#: module.php:405
+msgid "Languages"
+msgstr "Kalbos"
+
+#: module.php:409
 msgid "Show this album for which languages?"
 msgstr "Rodyti šį albumą šioms kalboms?"
 
+#: module.php:426
+msgid "Visibility and Access"
+msgstr "Matomumas ir prieiga"
+
+#: module.php:430
+msgid "Album position"
+msgstr "Albumo padėtis"
+
+#: module.php:445
+msgid "This field controls the order in which the gallery albums are displayed."
+msgstr "Ši sritis kontroliuoja albumų rodymo tvarką galerijoje."
+
+#: module.php:447
+msgid "You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other albums later. For example, if you use the numbers 1, 6, 11, 16, you can later insert albums with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert albums in front of the first one."
+msgstr ""
+
+#: module.php:449
+msgid "When more than one gallery album has the same position number, only one of these albums will be visible."
+msgstr "Kai daugiau negu vienas albumas galerijoje turi tą patį tvarkos numerį tik vienas iš jų bus matomas."
+
+#: module.php:455
+msgid "Album visibility"
+msgstr "Albumo matomumas"
+
+#: module.php:458 module.php:632
+msgid "All"
+msgstr "Visi"
+
+#: module.php:462
+msgid "You can determine whether this album will be visible regardless of family tree, or whether it will be visible only to the selected family tree."
+msgstr ""
+
 # Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:323
+#: module.php:468
 msgid "Access level"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:337
-msgid "Save"
+#: module.php:478
+msgid "save"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:339
-msgid "Cancel"
+#: module.php:482
+msgid "cancel"
 msgstr ""
-
-#: module.php:437
-msgid "Installation document"
-msgstr ""
-
-#: module.php:437
-msgid "ReadMe"
-msgstr "Skaityk Mane"
 
 # Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:441
+#: module.php:591
 msgid "Family tree"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:445
+#: module.php:596
 msgid "show"
 msgstr ""
 
-#: module.php:452
-msgid "The gallery is empty."
-msgstr "Galerija yra tuščia."
+#: module.php:612
+msgid "ReadMe"
+msgstr "Skaityk Mane"
 
-# Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:458
-msgid "Position item"
-msgstr ""
+#: module.php:621
+msgid "Position"
+msgstr "Matomumo tvarka"
 
-# Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:481 module.php:701
-msgid "Edit"
-msgstr ""
+#: module.php:622
+msgid "Album title"
+msgstr "Albumo vardas"
 
-#: module.php:484
+#: module.php:623
+msgid "Controls"
+msgstr "Valdymas"
+
+#: module.php:669
 msgid "Are you sure you want to delete this album?"
 msgstr "Ar tikrai ištrinti šį albumą?"
 
-# Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:484
-msgid "Delete"
-msgstr ""
-
-#: module.php:545
+#: module.php:725
 msgid "Show descriptions"
 msgstr "Rodyti aprašymus"
 
-#: module.php:546
+#: module.php:726
 msgid "Hide descriptions"
 msgstr "Slėpti aprašymus"
 
-#: module.php:547
+#: module.php:727
 msgid "Play slideshow"
 msgstr "Groti skaidrių peržiūrą"
 
-#: module.php:548
+#: module.php:728
 msgid "Pause slideshow"
 msgstr "Stabdyti skaidrių peržiūrą"
 
-#: module.php:549
+#: module.php:729
 msgid "Enter fullscreen"
 msgstr "Įeiti į viso ekrano rėžimą"
 
-#: module.php:550
+#: module.php:730
 msgid "Exit fullscreen"
 msgstr "Išeiti iš viso ekrano rėžimo"
 
-#: module.php:551
+#: module.php:731
 msgid "Next image"
 msgstr "Sekanti nuotrauka"
 
-#: module.php:552
+#: module.php:732
 msgid "Previous image"
 msgstr "Preitoji nuotrauka"
 
-#: module.php:627
+#: module.php:807
 msgid "Picture galleries"
 msgstr "Nuotraukų galerijos"
 
-#: module.php:660
+#: module.php:845
 msgid "Image collections related to our family"
 msgstr "Paveikslų galerijos susiėjusios su mūsų šeima"
 
-#: module.php:704
+# Do not translate. Already in webtrees core.
+#: module.php:886
+msgid "Edit"
+msgstr ""
+
+#: module.php:889
 msgid "Manage links"
 msgstr "Tvarkyti nuorodas"
 
-#: module.php:710
+#: module.php:895
 msgid "Linked to:"
 msgstr "Susietas su:"
 
-#: module.php:744
+#: module.php:929
 msgid "Album is empty. Please choose other album."
 msgstr "Albumas yra tuščias. Prašome pasirinkti kitą albumą."
+
+#~ msgid "Delete album"
+#~ msgstr "Ištrinti albumą"
+
+#~ msgid "Move album down"
+#~ msgstr "Perkelti albumą žemyn"
+
+#~ msgid "Move album up"
+#~ msgstr "Perkelti albumą aukštyn"
+
+#~ msgid "Album source"
+#~ msgstr "Albumo šaltinis"
+
+#~ msgid "The gallery is empty."
+#~ msgstr "Galerija yra tuščia."

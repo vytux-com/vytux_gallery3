@@ -472,7 +472,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 					</div>
 				</div>
 				
-				<div class="row col-sm-12 text-center">
+				<div class="row col-sm-9 col-sm-offset-3">
 					<button class="btn btn-primary" type="submit">
 						<i class="fa fa-check"></i>
 						<?php echo WT_I18N::translate('save'); ?>
@@ -678,7 +678,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 	}
 
 	private function getJavaScript($item_id) {
-		$theme = "classic";// alternatives: "azur", "simpl_galleria"
+		$theme = "classic";// alternatives: "azur"
 		$plugin=get_block_setting($item_id, 'plugin');
 		$js='Galleria.loadTheme("'.WT_STATIC_URL.WT_MODULES_DIR.$this->getName().'/galleria/themes/'.$theme.'/galleria.'.$theme.'.js");';
 			switch ($plugin) {
