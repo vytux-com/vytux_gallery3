@@ -473,8 +473,14 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 				</div>
 				
 				<div class="row col-sm-12 text-center">
-					<input class="btn btn-primary" type="submit" value="<?php echo WT_I18N::translate('Save'); ?>">
-					<input class="btn" type="button" value="<?php echo WT_I18N::translate('Cancel'); ?>" onclick="window.location='<?php echo $this->getConfigLink(); ?>';">
+					<button class="btn btn-primary" type="submit">
+						<i class="fa fa-check"></i>
+						<?php echo WT_I18N::translate('save'); ?>
+					</button>
+					<button class="btn" type="button" onclick="window.location='<?php echo $this->getConfigLink(); ?>';">
+						<i class="fa fa-close"></i>
+						<?php echo WT_I18N::translate('cancel'); ?>
+					</button>
 				</div>
 			</form>
 <?php
@@ -601,7 +607,10 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 			<div class="col-sm-4 text-right">		
 				<?php // TODO: Move to internal item/page
 				if (file_exists(WT_MODULES_DIR.$this->getName().'/readme.html')) { ?>
-					<a href="<?php echo WT_MODULES_DIR.$this->getName().'/readme.html" class="btn btn-primary">', WT_I18N::translate('ReadMe'); ?></a>
+					<a href="<?php echo WT_MODULES_DIR.$this->getName(); ?>/readme.html" class="btn btn-primary">
+						<i class="fa fa-newspaper-o"></i>
+						<?php echo WT_I18N::translate('ReadMe'); ?>
+					</a>
 				<?php } ?>
 			</div>
 		</div>
@@ -635,12 +644,24 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 					</td>
 					<td class="text-center">
 						<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_moveup&amp;block_id=<?php echo $album->block_id; ?>">
-							<div class="icon-uarrow">&nbsp;</div>
+							<?php
+								if ($album->block_order==$min_block_order) {
+									echo '&nbsp;';
+								} else {
+									echo '<div class="icon-uarrow">&nbsp;</div>';
+								} 
+							?>
 						</a>
 					</td>
 					<td class="text-center">
 						<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_movedown&amp;block_id=<?php echo $album->block_id; ?>">
-							<div class="icon-darrow">&nbsp;</div>
+							<?php
+								if ($album->block_order==$max_block_order) {
+									echo '&nbsp;';
+								} else {
+									echo '<div class="icon-darrow">&nbsp;</div>';
+								} 
+							?>
 						</a>
 					</td>
 					<td class="text-center">
