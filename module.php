@@ -24,9 +24,10 @@ namespace Webtrees;
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
+use Zend_Registry;
 
 class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, ModuleConfigInterface, ModuleMenuInterface  {
-/*
+
 	public function __construct() {
 		parent::__construct();
 		// Load any local user translations
@@ -48,7 +49,7 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 			}
 		}
 	}
-*/	
+	
 	// Extend class WT_Module
 	public function getTitle() {
 		return I18N::translate('Vytux Gallery 3');
