@@ -1,4 +1,6 @@
 <?php
+namespace Webtrees;
+
 // webtrees - vytux_gallery3 module based on vytux_gallery3
 //
 // Copyright (C) 2013 Vytautas Krivickas and vytux.com. All rights reserved.
@@ -22,11 +24,9 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-use WT\Auth;
-use WT\Theme;
 
-class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_Module_Block, WT_Module_Config {
-
+class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, ModuleConfigInterface, ModuleMenuInterface  {
+/*
 	public function __construct() {
 		parent::__construct();
 		// Load any local user translations
@@ -48,19 +48,19 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 			}
 		}
 	}
-
+*/	
 	// Extend class WT_Module
 	public function getTitle() {
-		return WT_I18N::translate('Vytux Gallery 3');
+		return I18N::translate('Vytux Gallery 3');
 	}
 
 	public function getMenuTitle() {
-		return WT_I18N::translate('Gallery');
+		return I18N::translate('Gallery');
 	}
 
 	// Extend class WT_Module
 	public function getDescription() {
-		return WT_I18N::translate('Display image galleries.');
+		return I18N::translate('Display image galleries.');
 	}
 
 	// Implement WT_Module_Menu
@@ -105,8 +105,8 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 	public function getMenu() {
 		global $controller, $SEARCH_SPIDER;
 		
-		$block_id=WT_Filter::get('block_id');
-		$default_block=WT_DB::prepare(
+		$block_id=Filter::get('block_id');
+		$default_block=Database::prepare(
 			"SELECT block_id FROM `##block` WHERE block_order=? AND module_name=?"
 		)->execute(array(0, $this->getName()))->fetchOne();
 
@@ -121,18 +121,18 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 		}
 
 		//-- main GALLERIES menu item
-		$menu = new WT_Menu($this->getMenuTitle(), 'module.php?mod='.$this->getName().'&amp;mod_action=show&amp;album_id='.$default_block, 'menu-my_gallery', 'down');
+		$menu = new Menu($this->getMenuTitle(), 'module.php?mod='.$this->getName().'&amp;mod_action=show&amp;album_id='.$default_block, 'menu-my_gallery', 'down');
 		$menu->addClass('menuitem', 'menuitem_hover', '');
 		foreach ($this->getMenuAlbumList() as $item) {
 			$languages=get_block_setting($item->block_id, 'languages');
 			if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item->album_access>=WT_USER_ACCESS_LEVEL) {
 				$path = 'module.php?mod='.$this->getName().'&amp;mod_action=show&amp;album_id='.$item->block_id;
-				$submenu = new WT_Menu(WT_I18N::translate($item->album_title), $path, 'menu-my_gallery-'.$item->block_id);
+				$submenu = new Menu(I18N::translate($item->album_title), $path, 'menu-my_gallery-'.$item->block_id);
 				$menu->addSubmenu($submenu);
 			}
 		}
 		if (Auth::isAdmin()) {
-			$submenu = new WT_Menu(WT_I18N::translate('Edit albums'), $this->getConfigLink(), 'menu-my_gallery-edit');
+			$submenu = new Menu(I18N::translate('Edit albums'), $this->getConfigLink(), 'menu-my_gallery-edit');
 			$menu->addSubmenu($submenu);
 		}
 		return $menu;
@@ -172,46 +172,46 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 		global $MEDIA_DIRECTORY;
 		require_once WT_ROOT.'includes/functions/functions_edit.php';
 		
-		if (WT_Filter::postBool('save') && WT_Filter::checkCsrf()) {
-			$block_id=WT_Filter::post('block_id');
+		if (Filter::postBool('save') && Filter::checkCsrf()) {
+			$block_id=Filter::post('block_id');
 			if ($block_id) {
-				WT_DB::prepare(
+				Database::prepare(
 					"UPDATE `##block` SET gedcom_id=NULLIF(?, ''), block_order=? WHERE block_id=?"
 				)->execute(array(
-					WT_Filter::post('gedcom_id'),
-					(int)WT_Filter::post('block_order'),
+					Filter::post('gedcom_id'),
+					(int)Filter::post('block_order'),
 					$block_id
 				));
 			} else {
-				WT_DB::prepare(
+				Database::prepare(
 					"INSERT INTO `##block` (gedcom_id, module_name, block_order) VALUES (NULLIF(?, ''), ?, ?)"
 				)->execute(array(
-					WT_Filter::post('gedcom_id'),
+					Filter::post('gedcom_id'),
 					$this->getName(),
-					(int)WT_Filter::post('block_order')
+					(int)Filter::post('block_order')
 				));
-				$block_id=WT_DB::getInstance()->lastInsertId();
+				$block_id=Database::getInstance()->lastInsertId();
 			}
-			set_block_setting($block_id, 'album_title',		  WT_Filter::post('album_title')); // allow html
-			set_block_setting($block_id, 'album_description', WT_Filter::post('album_description')); // allow html
-			set_block_setting($block_id, 'album_folder_w',	  WT_Filter::post('album_folder_w'));
-			set_block_setting($block_id, 'album_folder_f',	  WT_Filter::post('album_folder_f'));
-			set_block_setting($block_id, 'album_folder_p',	  WT_Filter::post('album_folder_p'));
-			set_block_setting($block_id, 'album_access',	  WT_Filter::post('album_access'));
-			set_block_setting($block_id, 'plugin',			  WT_Filter::post('plugin'));
+			set_block_setting($block_id, 'album_title',		  Filter::post('album_title')); // allow html
+			set_block_setting($block_id, 'album_description', Filter::post('album_description')); // allow html
+			set_block_setting($block_id, 'album_folder_w',	  Filter::post('album_folder_w'));
+			set_block_setting($block_id, 'album_folder_f',	  Filter::post('album_folder_f'));
+			set_block_setting($block_id, 'album_folder_p',	  Filter::post('album_folder_p'));
+			set_block_setting($block_id, 'album_access',	  Filter::post('album_access'));
+			set_block_setting($block_id, 'plugin',			  Filter::post('plugin'));
 			$languages=array();
-			foreach (WT_I18N::installed_languages() as $code=>$name) {
-				if (WT_Filter::postBool('lang_'.$code)) {
+			foreach (I18N::installed_languages() as $code=>$name) {
+				if (Filter::postBool('lang_'.$code)) {
 					$languages[]=$code;
 				}
 			}
 			set_block_setting($block_id, 'languages', implode(',', $languages));
 			$this->config();
 		} else {
-			$block_id=WT_Filter::get('block_id');
-			$controller=new WT_Controller_Page();
+			$block_id=Filter::get('block_id');
+			$controller=new PageController();
 			if ($block_id) {
-				$controller->setPageTitle(WT_I18N::translate('Edit album'));
+				$controller->setPageTitle(I18N::translate('Edit album'));
 				$item_title=get_block_setting($block_id, 'album_title');
 				$item_description=get_block_setting($block_id, 'album_description');
 				$item_folder_w=get_block_setting($block_id, 'album_folder_w');
@@ -219,14 +219,14 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 				$item_folder_p=get_block_setting($block_id, 'album_folder_p');
 				$item_access=get_block_setting($block_id, 'album_access');
 				$plugin=get_block_setting($block_id, 'plugin');
-				$block_order=WT_DB::prepare(
+				$block_order=Database::prepare(
 					"SELECT block_order FROM `##block` WHERE block_id=?"
 				)->execute(array($block_id))->fetchOne();
-				$gedcom_id=WT_DB::prepare(
+				$gedcom_id=Database::prepare(
 					"SELECT gedcom_id FROM `##block` WHERE block_id=?"
 				)->execute(array($block_id))->fetchOne();
 			} else {
-				$controller->setPageTitle(WT_I18N::translate('Add album to gallery'));
+				$controller->setPageTitle(I18N::translate('Add album to gallery'));
 				$item_title='';
 				$item_description='';
 				$item_folder_w=$MEDIA_DIRECTORY;
@@ -234,7 +234,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 				$item_folder_p='';
 				$item_access=1;
 				$plugin='webtrees';
-				$block_order=WT_DB::prepare(
+				$block_order=Database::prepare(
 					"SELECT IFNULL(MAX(block_order)+1, 0) FROM `##block` WHERE module_name=?"
 				)->execute(array($this->getName()))->fetchOne();
 				$gedcom_id=WT_GED_ID;
@@ -266,27 +266,27 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 					});
 				');
 			
-			if (array_key_exists('ckeditor', WT_Module::getActiveModules())) {
+			if (array_key_exists('ckeditor', Module::getActiveModules())) {
 				ckeditor_WT_Module::enableEditor($controller);
 			}
 			?>
 			
 			<ol class="breadcrumb small">
-				<li><a href="admin.php"><?php echo WT_I18N::translate('Control panel'); ?></a></li>
-				<li><a href="admin_modules.php"><?php echo WT_I18N::translate('Module administration'); ?></a></li>
-				<li><a href="module.php?mod=<?php echo $this->getName(); ?>&mod_action=admin_config"><?php echo WT_I18N::translate($this->getTitle()); ?></a></li>
+				<li><a href="admin.php"><?php echo I18N::translate('Control panel'); ?></a></li>
+				<li><a href="admin_modules.php"><?php echo I18N::translate('Module administration'); ?></a></li>
+				<li><a href="module.php?mod=<?php echo $this->getName(); ?>&mod_action=admin_config"><?php echo I18N::translate($this->getTitle()); ?></a></li>
 				<li class="active"><?php echo $controller->getPageTitle(); ?></li>
 			</ol>
 
 			<form class="form-horizontal" method="POST" action="#" name="gallery" id="galleryForm">
-				<?php echo WT_Filter::getCsrf(); ?>
+				<?php echo Filter::getCsrf(); ?>
 				<input type="hidden" name="save" value="1">
 				<input type="hidden" name="block_id" value="<?php echo $block_id; ?>">
-				<h3><?php echo WT_I18N::translate('General'); ?></h3>
+				<h3><?php echo I18N::translate('General'); ?></h3>
 				
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="title">
-						<?php echo WT_I18N::translate('Title'); ?>
+						<?php echo I18N::translate('Title'); ?>
 					</label>
 					<div class="col-sm-9">
 						<input
@@ -296,13 +296,13 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 							name="album_title"
 							required
 							type="text"
-							value="<?php echo WT_Filter::escapeHtml($item_title); ?>"
+							value="<?php echo Filter::escapeHtml($item_title); ?>"
 							>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="description">
-						<?php echo WT_I18N::translate('Description'); ?>
+						<?php echo I18N::translate('Description'); ?>
 					</label>
 					<div class="col-sm-9">
 						<textarea
@@ -313,33 +313,33 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 							name="album_description"
 							required
 							type="text">
-								<?php echo WT_Filter::escapeHtml($item_description); ?>
+								<?php echo Filter::escapeHtml($item_description); ?>
 						</textarea>
 					</div>
 				</div>
 				
-				<h3><?php echo WT_I18N::translate('Source'); ?></h3>
+				<h3><?php echo I18N::translate('Source'); ?></h3>
 				<span class="help-block small text-muted">
-					<?php echo WT_I18N::translate('Here you can either select the webtrees media folder to display in this album page, or you can set a link to a Flickr or Picasa location for your group of images.<br><em>[Such external sources must be public or they will not be viewable in webtrees.]</em><br><br>The module will add these references to the correct URLs to link to your Flickr or Picasa sites.'); ?>
+					<?php echo I18N::translate('Here you can either select the webtrees media folder to display in this album page, or you can set a link to a Flickr or Picasa location for your group of images.<br><em>[Such external sources must be public or they will not be viewable in webtrees.]</em><br><br>The module will add these references to the correct URLs to link to your Flickr or Picasa sites.'); ?>
 				</span>
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="plugin">
-						<?php echo WT_I18N::translate('Gallery Source'); ?>
+						<?php echo I18N::translate('Gallery Source'); ?>
 					</label>
 					<div class="row col-sm-9">
 						<div class="col-sm-4">
 							<label class="radio-inline">
-								<input id="webtrees-radio" type="radio" name="plugin" value="webtrees" <?php if ($plugin=='webtrees') {echo 'checked'; } ?> onclick="hide_fields();"><?php echo WT_I18N::translate('webtrees'); ?>
+								<input id="webtrees-radio" type="radio" name="plugin" value="webtrees" <?php if ($plugin=='webtrees') {echo 'checked'; } ?> onclick="hide_fields();"><?php echo I18N::translate('webtrees'); ?>
 							</label>
 						</div>
 						<div class="col-sm-4">
 							<label class="radio-inline ">
-								<input id="flickr-radio" type="radio" name="plugin" value="flickr" <?php if ($plugin=='flickr') {echo 'checked'; } ?> onclick="hide_fields();"><?php echo WT_I18N::translate('Flickr'); ?>
+								<input id="flickr-radio" type="radio" name="plugin" value="flickr" <?php if ($plugin=='flickr') {echo 'checked'; } ?> onclick="hide_fields();"><?php echo I18N::translate('Flickr'); ?>
 							</label>
 						</div>
 						<div class="col-sm-4">
 							<label class="radio-inline ">
-								<input id="picasa-radio" type="radio" name="plugin" value="picasa" <?php if ($plugin=='picasa') {echo 'checked'; } ?> onclick="hide_fields();"><?php echo WT_I18N::translate('Picasa'); ?>
+								<input id="picasa-radio" type="radio" name="plugin" value="picasa" <?php if ($plugin=='picasa') {echo 'checked'; } ?> onclick="hide_fields();"><?php echo I18N::translate('Picasa'); ?>
 							</label>
 						</div>
 					</div>
@@ -347,7 +347,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 				<fieldset id="fs_album_folder_w" <?php if ($plugin!=='webtrees') { echo 'disabled="disabled"'; } ?>>
 					<div class="form-group">
 						<label class="control-label col-sm-3" for="album_folder_w">
-							<?php echo WT_I18N::translate('Folder name on server'); ?>
+							<?php echo I18N::translate('Folder name on server'); ?>
 						</label>
 						<div class="col-sm-9" >
 							<div class="input-group">
@@ -362,7 +362,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 				<fieldset id="fs_album_folder_f" <?php if ($plugin!=='flickr') { echo 'disabled="disabled"'; } ?>>
 					<div class="form-group">
 						<label class="control-label col-sm-3" for="album_folder_f">
-							<?php echo WT_I18N::translate('Flickr set number'); ?>
+							<?php echo I18N::translate('Flickr set number'); ?>
 						</label>
 						<div class="col-sm-9">
 							<input
@@ -372,18 +372,18 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 							name="album_folder_f"
 							required
 							type="number"
-							value="<?php echo WT_Filter::escapeHtml($item_folder_f); ?>"
+							value="<?php echo Filter::escapeHtml($item_folder_f); ?>"
 							>
 						</div>
 						<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
-							<?php echo WT_I18N::translate('For Flickr (www.flickr.com), enter the <strong>Set</strong> number of your images, usually a long number like <strong>72157633272831222</strong>. Nothing else is required in this field.'); ?>
+							<?php echo I18N::translate('For Flickr (www.flickr.com), enter the <strong>Set</strong> number of your images, usually a long number like <strong>72157633272831222</strong>. Nothing else is required in this field.'); ?>
 						</span>
 					</div>
 				</fieldset>
 				<fieldset id="fs_album_folder_p" <?php if ($plugin!=='picasa') { echo 'disabled="disabled"'; } ?>>
 					<div class="form-group">
 						<label class="control-label col-sm-3" for="album_folder_p">
-							<?php echo WT_I18N::translate('Picasa user/album'); ?>
+							<?php echo I18N::translate('Picasa user/album'); ?>
 						</label>
 						<div class="col-sm-9">
 							<input
@@ -393,25 +393,25 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 							name="album_folder_p"
 							required
 							type="text"
-							value="<?php echo WT_Filter::escapeHtml($item_folder_p); ?>"
+							value="<?php echo Filter::escapeHtml($item_folder_p); ?>"
 							>
 						</div>
 						<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
-							<?php echo WT_I18N::translate('For Picassa (picasaweb.google.com) enter your user name and user album, in the format <strong>username/album</strong> like <strong>kiwi3685/NZImages</strong>'); ?>
+							<?php echo I18N::translate('For Picassa (picasaweb.google.com) enter your user name and user album, in the format <strong>username/album</strong> like <strong>kiwi3685/NZImages</strong>'); ?>
 						</span>
 					</div>
 				</fieldset>
 				
-				<h3><?php echo WT_I18N::translate('Languages'); ?></h3>
+				<h3><?php echo I18N::translate('Languages'); ?></h3>
 				
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="lang_*">
-						<?php echo WT_I18N::translate('Show this album for which languages?'); ?>
+						<?php echo I18N::translate('Show this album for which languages?'); ?>
 					</label>
 					<div class="row col-sm-9">
 						<?php 
 							$accepted_languages=explode(',', get_block_setting($block_id, 'languages'));
-							foreach (WT_I18N::installed_languages() as $locale => $language) {
+							foreach (I18N::installed_languages() as $locale => $language) {
 								$checked = in_array($locale, $accepted_languages) ? 'checked' : ''; 
 						?>
 								<div class="col-sm-3">
@@ -423,11 +423,11 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 					</div>
 				</div>
 				
-				<h3><?php echo WT_I18N::translate('Visibility and Access'); ?></h3>
+				<h3><?php echo I18N::translate('Visibility and Access'); ?></h3>
 				
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="block_order">
-						<?php echo WT_I18N::translate('Album position'); ?>
+						<?php echo I18N::translate('Album position'); ?>
 					</label>
 					<div class="col-sm-9">
 						<input
@@ -437,35 +437,35 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 							size="3"
 							required
 							type="number"
-							value="<?php echo WT_Filter::escapeHtml($block_order); ?>"
+							value="<?php echo Filter::escapeHtml($block_order); ?>"
 						>
 					</div>
 					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
 						<?php 
-							echo WT_I18N::translate('This field controls the order in which the gallery albums are displayed.'),
+							echo I18N::translate('This field controls the order in which the gallery albums are displayed.'),
 							'<br><br>',
-							WT_I18N::translate('You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other albums later. For example, if you use the numbers 1, 6, 11, 16, you can later insert albums with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert albums in front of the first one.'),
+							I18N::translate('You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other albums later. For example, if you use the numbers 1, 6, 11, 16, you can later insert albums with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert albums in front of the first one.'),
 							'<br><br>',
-							WT_I18N::translate('When more than one gallery album has the same position number, only one of these albums will be visible.'); 
+							I18N::translate('When more than one gallery album has the same position number, only one of these albums will be visible.'); 
 						?>
 					</span>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="block_order">
-						<?php echo WT_I18N::translate('Album visibility'); ?>
+						<?php echo I18N::translate('Album visibility'); ?>
 					</label>
 					<div class="col-sm-9">
-						<?php echo select_edit_control('gedcom_id', WT_Tree::getIdList(), WT_I18N::translate('All'), $gedcom_id, 'class="form-control"'); ?>
+						<?php echo select_edit_control('gedcom_id', Tree::getIdList(), I18N::translate('All'), $gedcom_id, 'class="form-control"'); ?>
 					</div>
 					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
 						<?php 
-							echo WT_I18N::translate('You can determine whether this album will be visible regardless of family tree, or whether it will be visible only to the selected family tree.'); 
+							echo I18N::translate('You can determine whether this album will be visible regardless of family tree, or whether it will be visible only to the selected family tree.'); 
 						?>
 					</span>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="album_access">
-						<?php echo WT_I18N::translate('Access level'); ?>
+						<?php echo I18N::translate('Access level'); ?>
 					</label>
 					<div class="col-sm-9">
 						<?php echo edit_field_access_level('album_access', $item_access, 'class="form-control"'); ?>
@@ -475,11 +475,11 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 				<div class="row col-sm-9 col-sm-offset-3">
 					<button class="btn btn-primary" type="submit">
 						<i class="fa fa-check"></i>
-						<?php echo WT_I18N::translate('save'); ?>
+						<?php echo I18N::translate('save'); ?>
 					</button>
 					<button class="btn" type="button" onclick="window.location='<?php echo $this->getConfigLink(); ?>';">
 						<i class="fa fa-close"></i>
-						<?php echo WT_I18N::translate('cancel'); ?>
+						<?php echo I18N::translate('cancel'); ?>
 					</button>
 				</div>
 			</form>
@@ -488,25 +488,25 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 	}
 
 	private function delete() {
-		$block_id=WT_Filter::get('block_id');
+		$block_id=Filter::get('block_id');
 
-		WT_DB::prepare(
+		Database::prepare(
 			"DELETE FROM `##block_setting` WHERE block_id=?"
 		)->execute(array($block_id));
 
-		WT_DB::prepare(
+		Database::prepare(
 			"DELETE FROM `##block` WHERE block_id=?"
 		)->execute(array($block_id));
 	}
 
 	private function moveUp() {
-		$block_id=WT_Filter::get('block_id');
+		$block_id=Filter::get('block_id');
 
-		$block_order=WT_DB::prepare(
+		$block_order=Database::prepare(
 			"SELECT block_order FROM `##block` WHERE block_id=?"
 		)->execute(array($block_id))->fetchOne();
 
-		$swap_block=WT_DB::prepare(
+		$swap_block=Database::prepare(
 			"SELECT block_order, block_id".
 			" FROM `##block`".
 			" WHERE block_order=(".
@@ -515,23 +515,23 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 			" LIMIT 1"
 		)->execute(array($block_order, $this->getName(), $this->getName()))->fetchOneRow();
 		if ($swap_block) {
-			WT_DB::prepare(
+			Database::prepare(
 				"UPDATE `##block` SET block_order=? WHERE block_id=?"
 			)->execute(array($swap_block->block_order, $block_id));
-			WT_DB::prepare(
+			Database::prepare(
 				"UPDATE `##block` SET block_order=? WHERE block_id=?"
 			)->execute(array($block_order, $swap_block->block_id));
 		}
 	}
 
 	private function moveDown() {
-		$block_id=WT_Filter::get('block_id');
+		$block_id=Filter::get('block_id');
 
-		$block_order=WT_DB::prepare(
+		$block_order=Database::prepare(
 			"SELECT block_order FROM `##block` WHERE block_id=?"
 		)->execute(array($block_id))->fetchOne();
 
-		$swap_block=WT_DB::prepare(
+		$swap_block=Database::prepare(
 			"SELECT block_order, block_id".
 			" FROM `##block`".
 			" WHERE block_order=(".
@@ -540,10 +540,10 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 			" LIMIT 1"
 		)->execute(array($block_order, $this->getName(), $this->getName()))->fetchOneRow();
 		if ($swap_block) {
-			WT_DB::prepare(
+			Database::prepare(
 				"UPDATE `##block` SET block_order=? WHERE block_id=?"
 			)->execute(array($swap_block->block_order, $block_id));
-			WT_DB::prepare(
+			Database::prepare(
 				"UPDATE `##block` SET block_order=? WHERE block_id=?"
 			)->execute(array($block_order, $swap_block->block_id));
 		}
@@ -552,12 +552,12 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 	private function config() {
 		require_once 'includes/functions/functions_edit.php';
 
-		$controller=new WT_Controller_Page();
+		$controller=new PageController();
 		$controller
 			->setPageTitle($this->getTitle())
 			->pageHeader();
 
-		$albums=WT_DB::prepare(
+		$albums=Database::prepare(
 			"SELECT block_id, block_order, gedcom_id, bs1.setting_value AS album_title, bs2.setting_value AS album_description".
 			" FROM `##block` b".
 			" JOIN `##block_setting` bs1 USING (block_id)".
@@ -569,18 +569,18 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 			" ORDER BY block_order"
 		)->execute(array($this->getName(), WT_GED_ID, WT_GED_ID))->fetchAll();
 
-		$min_block_order=WT_DB::prepare(
+		$min_block_order=Database::prepare(
 			"SELECT MIN(block_order) FROM `##block` WHERE module_name=?"
 		)->execute(array($this->getName()))->fetchOne();
 
-		$max_block_order=WT_DB::prepare(
+		$max_block_order=Database::prepare(
 			"SELECT MAX(block_order) FROM `##block` WHERE module_name=?"
 		)->execute(array($this->getName()))->fetchOne();
 		?>
 		
 		<ol class="breadcrumb small">
-			<li><a href="admin.php"><?php echo WT_I18N::translate('Control panel'); ?></a></li>
-			<li><a href="admin_modules.php"><?php echo WT_I18N::translate('Module administration'); ?></a></li>
+			<li><a href="admin.php"><?php echo I18N::translate('Control panel'); ?></a></li>
+			<li><a href="admin_modules.php"><?php echo I18N::translate('Module administration'); ?></a></li>
 			<li class="active"><?php echo $controller->getPageTitle(); ?></li>
 		</ol>
 		
@@ -588,19 +588,19 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 			<div class="col-sm-4">
 				<form class="form form-inline">
 					<label for="ged" class="sr-only">
-						<?php echo WT_I18N::translate('Family tree'); ?>
+						<?php echo I18N::translate('Family tree'); ?>
 					</label>
 					<input type="hidden" name="mod" value="<?php echo  $this->getName(); ?>">
 					<input type="hidden" name="mod_action" value="admin_config">
-					<?php echo select_edit_control('ged', WT_Tree::getNameList(), null, WT_GEDCOM, 'class="form-control"'); ?>
-					<input type="submit" class="btn btn-primary" value="<?php echo WT_I18N::translate('show'); ?>">
+					<?php echo select_edit_control('ged', Tree::getNameList(), null, WT_GEDCOM, 'class="form-control"'); ?>
+					<input type="submit" class="btn btn-primary" value="<?php echo I18N::translate('show'); ?>">
 				</form>
 			</div>
 			<div class="col-sm-4 text-center">
 				<p>
 					<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_edit" class="btn btn-primary">
 						<i class="fa fa-plus"></i>
-						<?php echo WT_I18N::translate('Add album to gallery'); ?>
+						<?php echo I18N::translate('Add album to gallery'); ?>
 					</a>
 				</p>
 			</div>
@@ -609,7 +609,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 				if (file_exists(WT_MODULES_DIR.$this->getName().'/readme.html')) { ?>
 					<a href="<?php echo WT_MODULES_DIR.$this->getName(); ?>/readme.html" class="btn btn-info">
 						<i class="fa fa-newspaper-o"></i>
-						<?php echo WT_I18N::translate('ReadMe'); ?>
+						<?php echo I18N::translate('ReadMe'); ?>
 					</a>
 				<?php } ?>
 			</div>
@@ -618,9 +618,9 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 		<table class="table table-bordered table-condensed">
 			<thead>
 				<tr>
-					<th class="col-sm-2"><?php echo WT_I18N::translate('Position'); ?></th>
-					<th class="col-sm-3"><?php echo WT_I18N::translate('Album title'); ?></th>
-					<th class="col-sm-1" colspan=4><?php echo WT_I18N::translate('Controls'); ?></th>
+					<th class="col-sm-2"><?php echo I18N::translate('Position'); ?></th>
+					<th class="col-sm-3"><?php echo I18N::translate('Album title'); ?></th>
+					<th class="col-sm-1" colspan=4><?php echo I18N::translate('Controls'); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -629,13 +629,13 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 					<td>
 						<?php echo $album->block_order, ', ';
 						if ($album->gedcom_id==null) {
-							echo WT_I18N::translate('All');
+							echo I18N::translate('All');
 						} else {
-							echo WT_Tree::get($album->gedcom_id)->titleHtml();
+							echo Tree::get($album->gedcom_id)->titleHtml();
 						} ?>
 					</td>
 					<td>
-						<?php echo WT_Filter::escapeHtml(WT_I18N::translate($album->album_title)); ?>
+						<?php echo Filter::escapeHtml(I18N::translate($album->album_title)); ?>
 					</td>
 					<td class="text-center">
 						<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_edit&amp;block_id=<?php echo $album->block_id; ?>">
@@ -666,7 +666,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 					</td>
 					<td class="text-center">
 						<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_delete&amp;block_id=<?php echo $album->block_id; ?>"
-							onclick="return confirm('<?php echo WT_I18N::translate('Are you sure you want to delete this album?'); ?>');">
+							onclick="return confirm('<?php echo I18N::translate('Are you sure you want to delete this album?'); ?>');">
 							<div class="icon-delete">&nbsp;</div>
 						</a>
 					</td>
@@ -722,14 +722,14 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 				Galleria.run("#galleria", {
 					_showCaption: false,
 					_locale: {
-						show_captions:		"'.WT_I18N::translate('Show descriptions').'",
-						hide_captions:		"'.WT_I18N::translate('Hide descriptions').'",
-						play:				"'.WT_I18N::translate('Play slideshow').'",
-						pause:				"'.WT_I18N::translate('Pause slideshow').'",
-						enter_fullscreen:	"'.WT_I18N::translate('Enter fullscreen').'",
-						exit_fullscreen:	"'.WT_I18N::translate('Exit fullscreen').'",
-						next:				"'.WT_I18N::translate('Next image').'",
-						prev:				"'.WT_I18N::translate('Previous image').'",
+						show_captions:		"'.I18N::translate('Show descriptions').'",
+						hide_captions:		"'.I18N::translate('Hide descriptions').'",
+						play:				"'.I18N::translate('Play slideshow').'",
+						pause:				"'.I18N::translate('Pause slideshow').'",
+						enter_fullscreen:	"'.I18N::translate('Enter fullscreen').'",
+						exit_fullscreen:	"'.I18N::translate('Exit fullscreen').'",
+						next:				"'.I18N::translate('Next image').'",
+						prev:				"'.I18N::translate('Previous image').'",
 						showing_image:		"" // counter not compatible with I18N of webtrees
 					}
 				});
@@ -741,7 +741,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 
 	// Return the list of albums
 	private function getAlbumList() {
-		return WT_DB::prepare(
+		return Database::prepare(
 			"SELECT block_id, 
 				bs1.setting_value AS album_title, 
 				bs2.setting_value AS album_access, 
@@ -770,7 +770,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 	
 	// Return the list of albums for menu
 	private function getMenuAlbumList() {
-		return WT_DB::prepare(
+		return Database::prepare(
 			"SELECT block_id, bs1.setting_value AS album_title, bs2.setting_value AS album_access".
 			" FROM `##block` b".
 			" JOIN `##block_setting` bs1 USING (block_id)".
@@ -801,10 +801,10 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 	private function show() {
 		global $MEDIA_DIRECTORY, $controller;
 		$gallery_header_description = '';
-		$item_id=WT_Filter::get('album_id');
-		$controller=new WT_Controller_Page();
+		$item_id=Filter::get('album_id');
+		$controller=new PageController();
 		$controller
-			->setPageTitle(WT_I18N::translate('Picture galleries'))
+			->setPageTitle(I18N::translate('Picture galleries'))
 			->pageHeader()
 			->addExternalJavaScript(WT_STATIC_URL.WT_MODULES_DIR.$this->getName().'/galleria/galleria-1.4.2.min.js')
 			->addExternalJavaScript(WT_STATIC_URL.WT_MODULES_DIR.$this->getName().'/galleria/plugins/flickr/galleria.flickr.min.js')
@@ -825,7 +825,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 							if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item->album_access>=WT_USER_ACCESS_LEVEL) { ?>
 								<li class="ui-state-default ui-corner-top <?php echo ($item_id==$item->block_id ? ' ui-tabs-selected ui-state-active' : ''); ?>">
 									<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=show&amp;album_id=<?php echo $item->block_id; ?>">
-										<span title="<?php echo WT_I18N::translate($item->album_title); ?>"><?php echo WT_I18N::translate($item->album_title); ?></span>
+										<span title="<?php echo I18N::translate($item->album_title); ?>"><?php echo I18N::translate($item->album_title); ?></span>
 									</a>
 								</li>
 							<?php 
@@ -838,11 +838,11 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 						foreach ($item_list as $item) {
 							$languages=get_block_setting($item->block_id, 'languages');
 							if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item_id==$item->block_id && $item->album_access>=WT_USER_ACCESS_LEVEL) {
-								$item_gallery='<h4>'.WT_I18N::translate($item->album_description).'</h4>'.$this->mediaDisplay($item->album_folder_w, $item_id);
+								$item_gallery='<h4>'.I18N::translate($item->album_description).'</h4>'.$this->mediaDisplay($item->album_folder_w, $item_id);
 							}
 						}
 						if (!isset($item_gallery)) {
-							echo '<h4>'.WT_I18N::translate('Image collections related to our family').'</h4>'.$this->mediaDisplay('//', $item_id);
+							echo '<h4>'.I18N::translate('Image collections related to our family').'</h4>'.$this->mediaDisplay('//', $item_id);
 						} else {
 							echo $item_gallery;
 						}
@@ -861,7 +861,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 		// Get the related media items
 		$sub_folder=str_replace($MEDIA_DIRECTORY, "",$sub_folder);
 		$sql = "SELECT * FROM ##media WHERE m_filename LIKE '%" . $sub_folder . "%' ORDER BY m_filename";
-		$rows=WT_DB::prepare($sql)->execute()->fetchAll(PDO::FETCH_ASSOC);
+		$rows=Database::prepare($sql)->execute()->fetchAll(PDO::FETCH_ASSOC);
 		if ($plugin=='webtrees') {
 			foreach ($rows as $rowm) {
 				// Get info on how to handle this media file
@@ -883,16 +883,16 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 					$gallery_links='';
 					if (WT_USER_CAN_EDIT) {
 						$gallery_links.='<div class="edit_links">';
-							$gallery_links.='<div class="image_option"><a href="'. $media->getHtmlUrl(). '"><img src="'.WT_MODULES_DIR.$this->getName().'/themes/'.Theme::theme()->themeId().'/edit.png" title="'.WT_I18N::translate('Edit').'"></a></div>';
+							$gallery_links.='<div class="image_option"><a href="'. $media->getHtmlUrl(). '"><img src="'.WT_MODULES_DIR.$this->getName().'/themes/'.Theme::theme()->themeId().'/edit.png" title="'.I18N::translate('Edit').'"></a></div>';
 							if (WT_USER_GEDCOM_ADMIN) {
-								if (array_key_exists('GEDFact_assistant', WT_Module::getActiveModules())) {
-									$gallery_links.='<div class="image_option"><a onclick="return ilinkitem(\''.$rowm['m_id'].'\', \'manage\')" href="#"><img src="'.WT_MODULES_DIR.$this->getName().'/themes/'.Theme::theme()->themeId().'/link.png" title="'.WT_I18N::translate('Manage links').'"></a></div>';
+								if (array_key_exists('GEDFact_assistant', Module::getActiveModules())) {
+									$gallery_links.='<div class="image_option"><a onclick="return ilinkitem(\''.$rowm['m_id'].'\', \'manage\')" href="#"><img src="'.WT_MODULES_DIR.$this->getName().'/themes/'.Theme::theme()->themeId().'/link.png" title="'.I18N::translate('Manage links').'"></a></div>';
 								}
 							}
 						$gallery_links.='</div><hr>';// close .edit_links
 					}						
 					if ($links) {
-						$gallery_links .='<h4>'.WT_I18N::translate('Linked to:').'</h4>';
+						$gallery_links .='<h4>'.I18N::translate('Linked to:').'</h4>';
 						$gallery_links .='<div id="image_links">';
 							foreach ($links as $record) {
 									$gallery_links .= '<a href="' . $record->getHtmlUrl() . '">' . $record->getFullname().'</a><br>';
@@ -926,7 +926,7 @@ class vytux_gallery3_WT_Module extends WT_Module implements WT_Module_Menu, WT_M
 				'</div>'.// close #page
 				'<div style="clear: both;"></div>';
 		} else {
-			$html.=WT_I18N::translate('Album is empty. Please choose other album.').
+			$html.=I18N::translate('Album is empty. Please choose other album.').
 				'</div>'.// close #galleria
 				'</div>'.// close #page
 				'<div style="clear: both;"></div>';
