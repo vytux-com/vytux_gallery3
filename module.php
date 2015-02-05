@@ -1,5 +1,5 @@
 <?php
-namespace Webtrees;
+namespace Fisharebest\Webtrees;
 
 // webtrees - vytux_gallery3 module based on vytux_gallery3
 //
