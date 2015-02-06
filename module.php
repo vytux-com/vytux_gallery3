@@ -574,6 +574,7 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 		$max_block_order=Database::prepare(
 			"SELECT MAX(block_order) FROM `##block` WHERE module_name=?"
 		)->execute(array($this->getName()))->fetchOne();
+		
 		?>
 		
 		<ol class="breadcrumb small">
@@ -629,7 +630,7 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 						if ($album->gedcom_id==null) {
 							echo I18N::translate('All');
 						} else {
-							echo Tree::get($album->gedcom_id)->titleHtml();
+							echo Tree::get($album->gedcom_id)->getTitleHtml();
 						} ?>
 					</td>
 					<td>
