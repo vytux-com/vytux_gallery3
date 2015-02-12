@@ -718,7 +718,7 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 						if ($album->gedcom_id==null) {
 							echo I18N::translate('All');
 						} else {
-							echo Tree::get($album->gedcom_id)->getTitleHtml();
+							echo Tree::findById($album->gedcom_id)->getTitleHtml();
 						} ?>
 					</td>
 					<td>
