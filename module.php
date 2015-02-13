@@ -210,6 +210,7 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 		} else {
 			$block_id=Filter::get('block_id');
 			$controller=new PageController();
+			$controller->restrictAccess(WT_USER_CAN_EDIT);
 			if ($block_id) {
 				$controller->setPageTitle(I18N::translate('Edit album'));
 				$item_title=get_block_setting($block_id, 'album_title');
@@ -488,70 +489,86 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 	}
 
 	private function delete() {
-		$block_id=Filter::get('block_id');
+		if (WT_USER_GEDCOM_ADMIN) {
+			$block_id=Filter::get('block_id');
 
-		Database::prepare(
-			"DELETE FROM `##block_setting` WHERE block_id=?"
-		)->execute(array($block_id));
+			Database::prepare(
+				"DELETE FROM `##block_setting` WHERE block_id=?"
+			)->execute(array($block_id));
 
-		Database::prepare(
-			"DELETE FROM `##block` WHERE block_id=?"
-		)->execute(array($block_id));
+			Database::prepare(
+				"DELETE FROM `##block` WHERE block_id=?"
+			)->execute(array($block_id));
+		} else {
+			header('Location: ' . WT_BASE_URL);
+			exit;
+		}
 	}
 
 	private function moveUp() {
-		$block_id=Filter::get('block_id');
+		if (WT_USER_GEDCOM_ADMIN) {
+			$block_id=Filter::get('block_id');
 
-		$block_order=Database::prepare(
-			"SELECT block_order FROM `##block` WHERE block_id=?"
-		)->execute(array($block_id))->fetchOne();
+			$block_order=Database::prepare(
+				"SELECT block_order FROM `##block` WHERE block_id=?"
+			)->execute(array($block_id))->fetchOne();
 
-		$swap_block=Database::prepare(
-			"SELECT block_order, block_id".
-			" FROM `##block`".
-			" WHERE block_order=(".
-			"  SELECT MAX(block_order) FROM `##block` WHERE block_order < ? AND module_name=?".
-			" ) AND module_name=?".
-			" LIMIT 1"
-		)->execute(array($block_order, $this->getName(), $this->getName()))->fetchOneRow();
-		if ($swap_block) {
-			Database::prepare(
-				"UPDATE `##block` SET block_order=? WHERE block_id=?"
-			)->execute(array($swap_block->block_order, $block_id));
-			Database::prepare(
-				"UPDATE `##block` SET block_order=? WHERE block_id=?"
-			)->execute(array($block_order, $swap_block->block_id));
+			$swap_block=Database::prepare(
+				"SELECT block_order, block_id".
+				" FROM `##block`".
+				" WHERE block_order=(".
+				"  SELECT MAX(block_order) FROM `##block` WHERE block_order < ? AND module_name=?".
+				" ) AND module_name=?".
+				" LIMIT 1"
+			)->execute(array($block_order, $this->getName(), $this->getName()))->fetchOneRow();
+			if ($swap_block) {
+				Database::prepare(
+					"UPDATE `##block` SET block_order=? WHERE block_id=?"
+				)->execute(array($swap_block->block_order, $block_id));
+				Database::prepare(
+					"UPDATE `##block` SET block_order=? WHERE block_id=?"
+				)->execute(array($block_order, $swap_block->block_id));
+			}
+		} else {
+			header('Location: ' . WT_BASE_URL);
+			exit;
 		}
 	}
 
 	private function moveDown() {
-		$block_id=Filter::get('block_id');
+		if (WT_USER_GEDCOM_ADMIN) {
+			$block_id=Filter::get('block_id');
 
-		$block_order=Database::prepare(
-			"SELECT block_order FROM `##block` WHERE block_id=?"
-		)->execute(array($block_id))->fetchOne();
+			$block_order=Database::prepare(
+				"SELECT block_order FROM `##block` WHERE block_id=?"
+			)->execute(array($block_id))->fetchOne();
 
-		$swap_block=Database::prepare(
-			"SELECT block_order, block_id".
-			" FROM `##block`".
-			" WHERE block_order=(".
-			"  SELECT MIN(block_order) FROM `##block` WHERE block_order>? AND module_name=?".
-			" ) AND module_name=?".
-			" LIMIT 1"
-		)->execute(array($block_order, $this->getName(), $this->getName()))->fetchOneRow();
-		if ($swap_block) {
-			Database::prepare(
-				"UPDATE `##block` SET block_order=? WHERE block_id=?"
-			)->execute(array($swap_block->block_order, $block_id));
-			Database::prepare(
-				"UPDATE `##block` SET block_order=? WHERE block_id=?"
-			)->execute(array($block_order, $swap_block->block_id));
+			$swap_block=Database::prepare(
+				"SELECT block_order, block_id".
+				" FROM `##block`".
+				" WHERE block_order=(".
+				"  SELECT MIN(block_order) FROM `##block` WHERE block_order>? AND module_name=?".
+				" ) AND module_name=?".
+				" LIMIT 1"
+			)->execute(array($block_order, $this->getName(), $this->getName()))->fetchOneRow();
+			if ($swap_block) {
+				Database::prepare(
+					"UPDATE `##block` SET block_order=? WHERE block_id=?"
+				)->execute(array($swap_block->block_order, $block_id));
+				Database::prepare(
+					"UPDATE `##block` SET block_order=? WHERE block_id=?"
+				)->execute(array($block_order, $swap_block->block_id));
+			}
+		} else {
+			header('Location: ' . WT_BASE_URL);
+			exit;
 		}
 	}
 
 	private function config() {
 		$controller=new PageController();
 		$controller
+			->restrictAccess(WT_USER_GEDCOM_ADMIN)
 			->setPageTitle($this->getTitle())
 			->pageHeader();
 
