@@ -539,14 +539,14 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 				$args['block_id']    = $block_id;
 				$args['block_order'] = $swap_block->block_order;
 				Database::prepare(
-					"UPDATE `##block` SET block_order=? WHERE block_id=?"
+					"UPDATE `##block` SET block_order = :block_order WHERE block_id = :block_id"
 				)->execute($args);
 				
 				$args                = array();
-				$args['block_id']    = $block_order;
-				$args['block_order'] = $swap_block->block_id;
+				$args['block_order'] = $block_order;
+				$args['block_id']    = $swap_block->block_id;
 				Database::prepare(
-					"UPDATE `##block` SET block_order=? WHERE block_id=?"
+					"UPDATE `##block` SET block_order = :block_order WHERE block_id = :block_id"
 				)->execute($args);
 			}
 		} else {
@@ -582,14 +582,14 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 				$args['block_id']    = $block_id;
 				$args['block_order'] = $swap_block->block_order;
 				Database::prepare(
-					"UPDATE `##block` SET block_order=? WHERE block_id=?"
+					"UPDATE `##block` SET block_order = :block_order WHERE block_id = :block_id"
 				)->execute($args);
 				
 				$args                = array();
-				$args['block_id']    = $block_order;
-				$args['block_order'] = $swap_block->block_id;
+				$args['block_order'] = $block_order;
+				$args['block_id']    = $swap_block->block_id;
 				Database::prepare(
-					"UPDATE `##block` SET block_order=? WHERE block_id=?"
+					"UPDATE `##block` SET block_order = :block_order WHERE block_id = :block_id"
 				)->execute($args);
 			}
 		} else {
@@ -620,12 +620,13 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 			" ORDER BY block_order"
 		)->execute($args)->fetchAll();
 
+		unset($args['tree_id']);
 		$min_block_order = Database::prepare(
-			"SELECT MIN(block_order) FROM `##block` WHERE module_name=:module_name"
+			"SELECT MIN(block_order) FROM `##block` WHERE module_name = :module_name"
 		)->execute($args)->fetchOne();
 
 		$max_block_order = Database::prepare(
-			"SELECT MAX(block_order) FROM `##block` WHERE module_name=:module_name"
+			"SELECT MAX(block_order) FROM `##block` WHERE module_name = :module_name"
 		)->execute($args)->fetchOne();
 		?>
 		
