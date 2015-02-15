@@ -186,7 +186,7 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 				$args['block_id']    = $block_id;
 				Database::prepare(
 					"UPDATE `##block` SET gedcom_id=NULLIF(:tree_id, ''), block_order=:block_order WHERE block_id=:block_id"
-				)->execute($args));
+				)->execute($args);
 			} else {
 				$args['tree_id']     = Filter::post('gedcom_id');
 				$args['module_name'] = $this->getName();
