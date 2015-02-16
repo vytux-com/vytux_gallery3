@@ -24,6 +24,7 @@ namespace Fisharebest\Webtrees;
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
+use PDO;
 use Zend_Translate;
 
 class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, ModuleConfigInterface, ModuleMenuInterface  {
@@ -175,7 +176,7 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 	// Action from the configuration page
 	private function edit() {
 		global $MEDIA_DIRECTORY;
-		$args     = array();
+		$args = array();
 		
 		if (Filter::postBool('save') && Filter::checkCsrf()) {
 			$block_id = Filter::post('block_id');
