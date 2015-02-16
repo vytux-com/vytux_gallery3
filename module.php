@@ -1013,7 +1013,7 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 		if ($plugin == 'webtrees') {
 			foreach ($rows as $rowm) {
 				// Get info on how to handle this media file
-				$media = WT_Media::getInstance($rowm['m_id']);
+				$media = Media::getInstance($rowm['m_id']);
 				if ($media->canShow()) {
 					$links = array_merge(
 						$media->linkedIndividuals('OBJE'),
