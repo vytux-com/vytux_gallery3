@@ -105,7 +105,7 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 
 	// Implement WT_Module_Menu
 	public function getMenu() {
-		global $controller, $SEARCH_SPIDER;
+		global $controller;
 		
 		$args                = array();
 		$args['block_order'] = 0;
@@ -116,7 +116,7 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 			"SELECT block_id FROM `##block` WHERE block_order=:block_order AND module_name=:module_name"
 		)->execute($args)->fetchOne();
 
-		if ($SEARCH_SPIDER) {
+		if (Auth::isSearchEngine()) {
 			return null;
 		}
 		
