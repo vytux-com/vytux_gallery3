@@ -610,14 +610,14 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 		$args['module_name'] = $this->getName();
 		$args['tree_id']     = WT_GED_ID;
 		$albums              = Database::prepare(
-			"SELECT block_id, block_order, gedcom_id, bs1.setting_value AS album_title, bs2.setting_value AS album_description".
-			" FROM `##block` b".
-			" JOIN `##block_setting` bs1 USING (block_id)".
-			" JOIN `##block_setting` bs2 USING (block_id)".
-			" WHERE module_name = :module_name".
-			" AND bs1.setting_name = 'album_title'".
-			" AND bs2.setting_name = 'album_description'".
-			" AND IFNULL(gedcom_id, :tree_id) = :tree_id".
+			"SELECT block_id, block_order, gedcom_id, bs1.setting_value AS album_title, bs2.setting_value AS album_description" .
+			" FROM `##block` b" .
+			" JOIN `##block_setting` bs1 USING (block_id)" .
+			" JOIN `##block_setting` bs2 USING (block_id)" .
+			" WHERE module_name = :module_name" .
+			" AND bs1.setting_name = 'album_title'" .
+			" AND bs2.setting_name = 'album_description'" .
+			" AND IFNULL(gedcom_id, :tree_id) = :tree_id" .
 			" ORDER BY block_order"
 		)->execute($args)->fetchAll();
 
@@ -630,7 +630,6 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 			"SELECT MAX(block_order) FROM `##block` WHERE module_name = :module_name"
 		)->execute($args)->fetchOne();
 		?>
-		
 		<style>
 			.text-left-not-xs, .text-left-not-sm, .text-left-not-md, .text-left-not-lg {
 				text-align: left;
@@ -742,7 +741,7 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 				<p>
 					<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_edit" class="btn btn-primary">
 						<i class="fa fa-plus"></i>
-						<?php echo I18N::translate('Add page'); ?>
+						<?php echo I18N::translate('Add Gallery'); ?>
 					</a>
 				</p>
 			</div>
