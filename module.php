@@ -27,10 +27,10 @@ namespace Fisharebest\Webtrees;
 use PDO;
 use Zend_Translate;
 
-class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, ModuleConfigInterface, ModuleMenuInterface  {
+class VytuxGallery3Module extends Module implements ModuleBlockInterface, ModuleConfigInterface, ModuleMenuInterface  {
 
 	public function __construct() {
-		parent::__construct();
+		parent::__construct('vytux_gallery3');
 		// Load any local user translations
 		if (is_dir(WT_MODULES_DIR . $this->getName() . '/language')) {
 			if (file_exists(WT_MODULES_DIR . $this->getName() . '/language/' . WT_LOCALE . '.mo')) {
@@ -1081,3 +1081,4 @@ class vytux_gallery3_WT_Module extends Module implements ModuleBlockInterface, M
 		return $html;
 	}
 }
+return new VytuxGallery3Module;
