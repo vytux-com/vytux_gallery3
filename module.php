@@ -1067,7 +1067,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 					}
 				}
 			}
-			if (webtrees/Auth::isMember($WT_TREE) || (isset($media_links) && $media_links != '')) {
+			if (webtrees\Auth::isMember($WT_TREE) || (isset($media_links) && $media_links != '')) {
 				$html =
 					'<div id="links_bar"></div>'.
 					'<div id="galleria" style="width:80%;">';
