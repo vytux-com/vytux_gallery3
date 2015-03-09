@@ -73,7 +73,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 
 	// Extend class WT_Module
 	public function defaultAccessLevel() {
-		return WT_PRIV_NONE;
+        return webtrees\Auth::PRIV_NONE;
 	}
 
 	// Implement WT_Module_Config
@@ -106,7 +106,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 
 	// Implement WT_Module_Menu
 	public function getMenu() {
-		global $controller;
+		global $controller, $WT_TREE;
 		
 		$args                = array();
 		$args['block_order'] = 0;
@@ -132,7 +132,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 		$menu->addClass('menuitem', 'menuitem_hover', '');
 		foreach ($this->getMenuAlbumList() as $item) {
 			$languages = webtrees\get_block_setting($item->block_id, 'languages');
-			if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item->album_access >= WT_USER_ACCESS_LEVEL) {
+			if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item->album_access >= webtrees\Auth::accessLevel($WT_TREE)) {
 				$path = 'module.php?mod=' . $this->getName() . '&amp;mod_action=show&amp;album_id=' . $item->block_id;
 				$submenu = new webtrees\Menu(webtrees\I18N::translate($item->album_title), $path, 'menu-my_gallery-' . $item->block_id);
 				$menu->addSubmenu($submenu);
@@ -176,7 +176,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 
 	// Action from the configuration page
 	private function edit() {
-		global $MEDIA_DIRECTORY;
+		global $MEDIA_DIRECTORY, $WT_TREE;
 		$args = array();
 		
 		if (webtrees\Filter::postBool('save') && webtrees\Filter::checkCsrf()) {
@@ -216,7 +216,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 		} else {
 			$block_id = webtrees\Filter::get('block_id');
 			$controller = new webtrees\PageController();
-			$controller->restrictAccess(WT_USER_CAN_EDIT);
+            $controller->restrictAccess(webtrees\Auth::isEditor($WT_TREE));
 			if ($block_id) {
 				$controller->setPageTitle(webtrees\I18N::translate('Edit album'));
 				$item_title       = webtrees\get_block_setting($block_id, 'album_title');
@@ -246,7 +246,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 				$block_order         = webtrees\Database::prepare(
 					"SELECT IFNULL(MAX(block_order)+1, 0) FROM `##block` WHERE module_name=:module_name"
 				)->execute($args)->fetchOne();
-				$gedcom_id           = WT_GED_ID;
+                $gedcom_id           = $WT_TREE->getTreeId();
 			}
 			$controller
 				->pageHeader()
@@ -497,7 +497,9 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 	}
 
 	private function delete() {
-		if (WT_USER_GEDCOM_ADMIN) {
+        global $WT_TREE;
+        
+        if (webtrees\Auth::isManager($WT_TREE)) {
 			$args             = array();
 			$args['block_id'] = webtrees\Filter::get('block_id');
 
@@ -515,7 +517,9 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 	}
 
 	private function moveUp() {
-		if (WT_USER_GEDCOM_ADMIN) {
+        global $WT_TREE;
+        
+        if (webtrees\Auth::isManager($WT_TREE)) {
 			$block_id         = webtrees\Filter::get('block_id');
 			$args             = array();
 			$args['block_id'] = $block_id;
@@ -558,7 +562,9 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 	}
 
 	private function moveDown() {
-		if (WT_USER_GEDCOM_ADMIN) {
+        global $WT_TREE;
+        
+        if (webtrees\Auth::isManager($WT_TREE)) {
 			$block_id         = webtrees\Filter::get('block_id');
 			$args             = array();
 			$args['block_id'] = $block_id;
@@ -601,15 +607,17 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 	}
 
 	private function config() {
+		global $WT_TREE;
+		
 		$controller = new webtrees\PageController();
 		$controller
-			->restrictAccess(WT_USER_GEDCOM_ADMIN)
+			->restrictAccess(webtrees\Auth::isManager($WT_TREE))
 			->setPageTitle($this->getTitle())
 			->pageHeader();
 
 		$args                = array();
 		$args['module_name'] = $this->getName();
-		$args['tree_id']     = WT_GED_ID;
+        $args['tree_id']     = $WT_TREE->getTreeId();
 		$albums              = webtrees\Database::prepare(
 			"SELECT block_id, block_order, gedcom_id, bs1.setting_value AS album_title, bs2.setting_value AS album_description" .
 			" FROM `##block` b" .
@@ -730,7 +738,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 					<input type="hidden" name="mod" value="<?php echo  $this->getName(); ?>">
 					<input type="hidden" name="mod_action" value="admin_config">
 					<div class="col-sm-9 col-xs-9" style="padding:0;">
-						<?php echo webtrees\select_edit_control('ged', webtrees\Tree::getNameList(), null, WT_GEDCOM, 'class="form-control"'); ?>
+						<?php echo webtrees\select_edit_control('ged', webtrees\Tree::getNameList(), null, $WT_TREE->getName(), 'class="form-control"'); ?>
 					</div>
 					<div class="col-sm-3" style="padding:0;">
 						<input type="submit" class="btn btn-primary" value="<?php echo webtrees\I18N::translate('show'); ?>">
@@ -883,9 +891,11 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 
 	// Return the list of albums
 	private function getAlbumList() {
+		global $WT_TREE;
+		
 		$args                = array();
 		$args['module_name'] = $this->getName();
-		$args['tree_id']     = WT_GED_ID;
+        $args['tree_id']     = $WT_TREE->getTreeId();
 		return webtrees\Database::prepare(
 			"SELECT block_id, 
 				bs1.setting_value AS album_title, 
@@ -915,9 +925,11 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 	
 	// Return the list of albums for menu
 	private function getMenuAlbumList() {
+		global $WT_TREE;
+		
 		$args                = array();
 		$args['module_name'] = $this->getName();
-		$args['tree_id']     = WT_GED_ID;
+        $args['tree_id']     = $WT_TREE->getTreeId();
 		return webtrees\Database::prepare(
 			"SELECT block_id, bs1.setting_value AS album_title, bs2.setting_value AS album_access".
 			" FROM `##block` b".
@@ -947,7 +959,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 
 	// Start to show the gallery display with the parts common to all galleries
 	private function show() {
-		global $MEDIA_DIRECTORY, $controller;
+		global $MEDIA_DIRECTORY, $controller, $WT_TREE;
 		$gallery_header_description = '';
 		$item_id = webtrees\Filter::get('album_id');
 		$controller = new webtrees\PageController();
@@ -970,7 +982,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 						$item_list = $this->getAlbumList();
 						foreach ($item_list as $item) {
 							$languages = webtrees\get_block_setting($item->block_id, 'languages');
-							if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item->album_access >= WT_USER_ACCESS_LEVEL) { ?>
+							if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item->album_access >= webtrees\Auth::accessLevel($WT_TREE)) { ?>
 								<li class="ui-state-default ui-corner-top <?php echo ($item_id == $item->block_id ? ' ui-tabs-selected ui-state-active' : ''); ?>">
 									<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=show&amp;album_id=<?php echo $item->block_id; ?>">
 										<span title="<?php echo webtrees\I18N::translate($item->album_title); ?>"><?php echo webtrees\I18N::translate($item->album_title); ?></span>
@@ -985,7 +997,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 					<?php 
 						foreach ($item_list as $item) {
 							$languages = webtrees\get_block_setting($item->block_id, 'languages');
-							if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item_id == $item->block_id && $item->album_access >= WT_USER_ACCESS_LEVEL) {
+							if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item_id == $item->block_id && $item->album_access >= webtrees\Auth::accessLevel($WT_TREE)) {
 								$item_gallery='<h4>' . webtrees\I18N::translate($item->album_description) . '</h4>' . $this->mediaDisplay($item->album_folder_w, $item_id);
 							}
 						}
@@ -1003,7 +1015,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 
 	// Print the gallery display
 	private function mediaDisplay($sub_folder, $item_id) {
-		global $MEDIA_DIRECTORY;
+		global $MEDIA_DIRECTORY, $WT_TREE;
 		$plugin = webtrees\get_block_setting($item_id, 'plugin');
 		$images = ''; 
 		// Get the related media items
@@ -1029,10 +1041,10 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 					$media_notes = $this->FormatGalleryNotes($rowm['m_gedcom']);
 					$mime_type = $media->mimeType();
 					$gallery_links = '';
-					if (WT_USER_CAN_EDIT) {
+					if (webtrees\Auth::isEditor($WT_TREE)) {
 						$gallery_links .= '<div class="edit_links">';
 							$gallery_links .= '<div class="image_option"><a href="' . $media->getHtmlUrl() . '"><img src="' . WT_MODULES_DIR . $this->getName() . '/themes/' . webtrees\Theme::theme()->themeId() . '/edit.png" title="'.webtrees\I18N::translate('Edit').'"></a></div>';
-							if (WT_USER_GEDCOM_ADMIN) {
+							if (webtrees\Auth::isManager($WT_TREE)) {
 								if (webtrees\Module::getModuleByName('GEDFact_assistant')) {
 									$gallery_links .= '<div class="image_option"><a onclick="return ilinkitem(\'' . $rowm['m_id'] . '\', \'manage\')" href="#"><img src="' . WT_MODULES_DIR . $this->getName() . '/themes/' . webtrees\Theme::theme()->themeId() . '/link.png" title="' . webtrees\I18N::translate('Manage links') . '"></a></div>';
 								}
@@ -1055,7 +1067,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 					}
 				}
 			}
-			if (WT_USER_CAN_ACCESS || (isset($media_links) && $media_links != '')) {
+			if (webtrees/Auth::isMember($WT_TREE) || (isset($media_links) && $media_links != '')) {
 				$html =
 					'<div id="links_bar"></div>'.
 					'<div id="galleria" style="width:80%;">';
