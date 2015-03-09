@@ -1025,7 +1025,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 		if ($plugin == 'webtrees') {
 			foreach ($rows as $rowm) {
 				// Get info on how to handle this media file
-				$media = webtrees\Media::getInstance($rowm['m_id']);
+				$media = webtrees\Media::getInstance($rowm['m_id'], $WT_TREE);
 				if ($media->canShow()) {
 					$links = array_merge(
 						$media->linkedIndividuals('OBJE'),
