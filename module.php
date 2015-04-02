@@ -27,7 +27,7 @@ namespace Vytux\webtrees_vytux_gallery3;
 use PDO;
 use Fisharebest\Webtrees as webtrees;
 
-class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBlockInterface, webtrees\ModuleConfigInterface, webtrees\ModuleMenuInterface  {
+class VytuxGallery3Module extends webtrees\AbstractModule implements webtrees\ModuleBlockInterface, webtrees\ModuleConfigInterface, webtrees\ModuleMenuInterface  {
 
 	public function __construct() {
 		parent::__construct('vytux_gallery3');
@@ -112,7 +112,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 		$menu = new webtrees\Menu($this->getMenuTitle(), 'module.php?mod=' . $this->getName() . '&amp;mod_action=show&amp;album_id=' . $default_block, 'menu-my_gallery', 'down');
 		$menu->addClass('menuitem', 'menuitem_hover', '');
 		foreach ($this->getMenuAlbumList() as $item) {
-			$languages = webtrees\get_block_setting($item->block_id, 'languages');
+			$languages = $this->getBlockSetting($item->block_id, 'languages');
 			if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item->album_access >= webtrees\Auth::accessLevel($WT_TREE)) {
 				$path = 'module.php?mod=' . $this->getName() . '&amp;mod_action=show&amp;album_id=' . $item->block_id;
 				$submenu = new webtrees\Menu(webtrees\I18N::translate($item->album_title), $path, 'menu-my_gallery-' . $item->block_id);
@@ -179,20 +179,22 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 				)->execute($args);
 				$block_id = webtrees\Database::getInstance()->lastInsertId();
 			}
-			webtrees\set_block_setting($block_id, 'album_title',       webtrees\Filter::post('album_title')); // allow html
-			webtrees\set_block_setting($block_id, 'album_description', webtrees\Filter::post('album_description')); // allow html
-			webtrees\set_block_setting($block_id, 'album_folder_w',	   webtrees\Filter::post('album_folder_w'));
-			webtrees\set_block_setting($block_id, 'album_folder_f',	   webtrees\Filter::post('album_folder_f'));
-			webtrees\set_block_setting($block_id, 'album_folder_p',	   webtrees\Filter::post('album_folder_p'));
-			webtrees\set_block_setting($block_id, 'album_access',	   webtrees\Filter::post('album_access'));
-			webtrees\set_block_setting($block_id, 'plugin',			   webtrees\Filter::post('plugin'));
+			$this->setBlockSetting($block_id, 'album_title',       webtrees\Filter::post('album_title')); // allow html
+			$this->setBlockSetting($block_id, 'album_description', webtrees\Filter::post('album_description')); // allow html
+			$this->setBlockSetting($block_id, 'album_folder_w',	   webtrees\Filter::post('album_folder_w'));
+			$this->setBlockSetting($block_id, 'album_folder_f',	   webtrees\Filter::post('album_folder_f'));
+			$this->setBlockSetting($block_id, 'album_folder_p',	   webtrees\Filter::post('album_folder_p'));
+			$this->setBlockSetting($block_id, 'album_access',	   webtrees\Filter::post('album_access'));
+			$this->setBlockSetting($block_id, 'plugin',			   webtrees\Filter::post('plugin'));
 			$languages = array();
-			foreach (webtrees\I18N::installedLanguages() as $code=>$name) {
+			foreach (webtrees\I18N::installedLocales() as $locale) {
+				$code = $locale->languageTag();
+				$name = $locale->endonym();
 				if (webtrees\Filter::postBool('lang_'.$code)) {
 					$languages[] = $code;
 				}
 			}
-			webtrees\set_block_setting($block_id, 'languages', implode(',', $languages));
+			$this->setBlockSetting($block_id, 'languages', implode(',', $languages));
 			$this->config();
 		} else {
 			$block_id = webtrees\Filter::get('block_id');
@@ -200,13 +202,13 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
             $controller->restrictAccess(webtrees\Auth::isEditor($WT_TREE));
 			if ($block_id) {
 				$controller->setPageTitle(webtrees\I18N::translate('Edit album'));
-				$item_title       = webtrees\get_block_setting($block_id, 'album_title');
-				$item_description = webtrees\get_block_setting($block_id, 'album_description');
-				$item_folder_w    = webtrees\get_block_setting($block_id, 'album_folder_w');
-				$item_folder_f    = webtrees\get_block_setting($block_id, 'album_folder_f');
-				$item_folder_p    = webtrees\get_block_setting($block_id, 'album_folder_p');
-				$item_access      = webtrees\get_block_setting($block_id, 'album_access');
-				$plugin           = webtrees\get_block_setting($block_id, 'plugin');
+				$item_title       = $this->getBlockSetting($block_id, 'album_title');
+				$item_description = $this->getBlockSetting($block_id, 'album_description');
+				$item_folder_w    = $this->getBlockSetting($block_id, 'album_folder_w');
+				$item_folder_f    = $this->getBlockSetting($block_id, 'album_folder_f');
+				$item_folder_p    = $this->getBlockSetting($block_id, 'album_folder_p');
+				$item_access      = $this->getBlockSetting($block_id, 'album_access');
+				$plugin           = $this->getBlockSetting($block_id, 'plugin');
 				$args['block_id'] = $block_id;
 				$block_order      = webtrees\Database::prepare(
 					"SELECT block_order FROM `##block` WHERE block_id=:block_id"
@@ -400,12 +402,14 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 					</label>
 					<div class="row col-sm-9">
 						<?php 
-							$accepted_languages=explode(',', webtrees\get_block_setting($block_id, 'languages'));
-							foreach (webtrees\I18N::installedLanguages() as $locale => $language) {
-								$checked = in_array($locale, $accepted_languages) ? 'checked' : ''; 
+							$accepted_languages=explode(',', $this->getBlockSetting($block_id, 'languages'));
+							foreach (webtrees\I18N::installedLocales() as $locale) {
+								$code = $locale->languageTag();
+								$name = $locale->endonym();
+								$checked = in_array($code, $accepted_languages) ? 'checked' : ''; 
 						?>
 								<div class="col-sm-3">
-									<label class="checkbox-inline "><input type="checkbox" name="lang_<?php echo $locale; ?>" <?php echo $checked; ?> ><?php echo $language; ?></label>
+									<label class="checkbox-inline "><input type="checkbox" name="lang_<?php echo $code; ?>" <?php echo $checked; ?> ><?php echo $name; ?></label>
 								</div>
 						<?php 
 							}
@@ -810,11 +814,11 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 
 	private function getJavaScript($item_id) {
 		$theme = "classic";// alternatives: "azur"
-		$plugin = webtrees\get_block_setting($item_id, 'plugin');
+		$plugin = $this->getBlockSetting($item_id, 'plugin');
 		$js = 'Galleria.loadTheme("' . WT_STATIC_URL . WT_MODULES_DIR . $this->getName() . '/galleria/themes/' . $theme . '/galleria.' . $theme.'.js");';
 			switch ($plugin) {
 			case 'flickr':
-			$flickr_set = webtrees\get_block_setting($item_id, 'album_folder_f');
+			$flickr_set = $this->getBlockSetting($item_id, 'album_folder_f');
 			$js .= '
 				Galleria.run("#galleria", {
 					flickr: "set:' . $flickr_set . '",
@@ -830,7 +834,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 			';
 			break;
 			case 'picasa':
-			$picasa_set = webtrees\get_block_setting($item_id, 'album_folder_p');
+			$picasa_set = $this->getBlockSetting($item_id, 'album_folder_p');
 			$js .= '
 				Galleria.run("#galleria", {
 					picasa: "useralbum:' . $picasa_set . '",
@@ -962,7 +966,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 					<?php 
 						$item_list = $this->getAlbumList();
 						foreach ($item_list as $item) {
-							$languages = webtrees\get_block_setting($item->block_id, 'languages');
+							$languages = $this->getBlockSetting($item->block_id, 'languages');
 							if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item->album_access >= webtrees\Auth::accessLevel($WT_TREE)) { ?>
 								<li class="ui-state-default ui-corner-top <?php echo ($item_id == $item->block_id ? ' ui-tabs-selected ui-state-active' : ''); ?>">
 									<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=show&amp;album_id=<?php echo $item->block_id; ?>">
@@ -977,7 +981,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 					<div id="outer_gallery_container" style="padding: 1em;">
 					<?php 
 						foreach ($item_list as $item) {
-							$languages = webtrees\get_block_setting($item->block_id, 'languages');
+							$languages = $this->getBlockSetting($item->block_id, 'languages');
 							if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $item_id == $item->block_id && $item->album_access >= webtrees\Auth::accessLevel($WT_TREE)) {
 								$item_gallery='<h4>' . webtrees\I18N::translate($item->album_description) . '</h4>' . $this->mediaDisplay($item->album_folder_w, $item_id);
 							}
@@ -997,7 +1001,7 @@ class VytuxGallery3Module extends webtrees\Module implements webtrees\ModuleBloc
 	// Print the gallery display
 	private function mediaDisplay($sub_folder, $item_id) {
 		global $MEDIA_DIRECTORY, $WT_TREE;
-		$plugin = webtrees\get_block_setting($item_id, 'plugin');
+		$plugin = $this->getBlockSetting($item_id, 'plugin');
 		$images = ''; 
 		// Get the related media items
 		$sub_folder = str_replace($MEDIA_DIRECTORY, "", $sub_folder);
