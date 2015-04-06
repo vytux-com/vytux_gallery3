@@ -2,16 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_gallery3\n"
 "POT-Creation-Date: 2015-04-05 14:39+1000\n"
-"PO-Revision-Date: 2015-04-05 14:39+1000\n"
-"Last-Translator: Vytautas Krivickas <vytautas.krivickas@gmail.com>\n"
+"PO-Revision-Date: 2015-04-07 00:57+0300\n"
+"Last-Translator: Vytautas <vytautas.krivickas@gmail.com>\n"
 "Language-Team: Vytux webtrees <webtrees@vytux.com>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Poedit 1.7.1\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.3-dev\n"
 "X-Poedit-KeywordsList: translate;noop;plural:1,2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -70,12 +69,7 @@ msgid "Source"
 msgstr "Šaltinis"
 
 #: module.php:315
-msgid ""
-"Here you can either select the webtrees media folder to display in this "
-"album page, or you can set a link to a Flickr or Picasa location for your "
-"group of images.<br><em>[Such external sources must be public or they will "
-"not be viewable in webtrees.]</em><br><br>The module will add these "
-"references to the correct URLs to link to your Flickr or Picasa sites."
+msgid "Here you can either select the webtrees media folder to display in this album page, or you can set a link to a Flickr or Picasa location for your group of images.<br><em>[Such external sources must be public or they will not be viewable in webtrees.]</em><br><br>The module will add these references to the correct URLs to link to your Flickr or Picasa sites."
 msgstr ""
 
 #: module.php:319
@@ -103,10 +97,7 @@ msgid "Flickr set number"
 msgstr "Flickr numeris"
 
 #: module.php:371
-msgid ""
-"For Flickr (www.flickr.com), enter the <strong>Set</strong> number of your "
-"images, usually a long number like <strong>72157633272831222</strong>. "
-"Nothing else is required in this field."
+msgid "For Flickr (www.flickr.com), enter the <strong>Set</strong> number of your images, usually a long number like <strong>72157633272831222</strong>. Nothing else is required in this field."
 msgstr ""
 
 #: module.php:378
@@ -114,15 +105,12 @@ msgid "Picasa user/album"
 msgstr "Picasa naudotojas/albumas"
 
 #: module.php:392
-msgid ""
-"For Picassa (picasaweb.google.com) enter your user name and user album, in "
-"the format <strong>username/album</strong> like <strong>kiwi3685/NZImages</"
-"strong>"
+msgid "For Picassa (picasaweb.google.com) enter your user name and user album, in the format <strong>username/album</strong> like <strong>kiwi3685/NZImages</strong>"
 msgstr ""
 
 #: module.php:397
 msgid "Languages"
-msgstr "Kalbos"
+msgstr ""
 
 #: module.php:401
 msgid "Show this album for which languages?"
@@ -130,33 +118,23 @@ msgstr "Rodyti šį albumą šioms kalboms?"
 
 #: module.php:420
 msgid "Visibility and Access"
-msgstr "Matomumas ir prieiga"
+msgstr ""
 
 #: module.php:424
 msgid "Album position"
 msgstr "Albumo padėtis"
 
 #: module.php:439
-msgid ""
-"This field controls the order in which the gallery albums are displayed."
+msgid "This field controls the order in which the gallery albums are displayed."
 msgstr "Ši sritis kontroliuoja albumų rodymo tvarką galerijoje."
 
 #: module.php:441
-msgid ""
-"You do not have to enter the numbers sequentially. If you leave holes in the "
-"numbering scheme, you can insert other albums later. For example, if you use "
-"the numbers 1, 6, 11, 16, you can later insert albums with the missing "
-"sequence numbers. Negative numbers and zero are allowed, and can be used to "
-"insert albums in front of the first one."
+msgid "You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other albums later. For example, if you use the numbers 1, 6, 11, 16, you can later insert albums with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert albums in front of the first one."
 msgstr ""
 
 #: module.php:443
-msgid ""
-"When more than one gallery album has the same position number, only one of "
-"these albums will be visible."
-msgstr ""
-"Kai daugiau negu vienas albumas galerijoje turi tą patį tvarkos numerį tik "
-"vienas iš jų bus matomas."
+msgid "When more than one gallery album has the same position number, only one of these albums will be visible."
+msgstr "Kai daugiau negu vienas albumas galerijoje turi tą patį tvarkos numerį tik vienas iš jų bus matomas."
 
 #: module.php:449
 msgid "Album visibility"
@@ -167,9 +145,7 @@ msgid "All"
 msgstr "Visi"
 
 #: module.php:456
-msgid ""
-"You can determine whether this album will be visible regardless of family "
-"tree, or whether it will be visible only to the selected family tree."
+msgid "You can determine whether this album will be visible regardless of family tree, or whether it will be visible only to the selected family tree."
 msgstr ""
 
 # Do not translate. Already in webtrees core.
