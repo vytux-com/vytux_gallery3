@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_gallery3\n"
 "POT-Creation-Date: 2015-04-05 14:39+1000\n"
-"PO-Revision-Date: 2015-04-07 00:57+0300\n"
+"PO-Revision-Date: 2015-04-07 10:42+0300\n"
 "Last-Translator: Vytautas <vytautas.krivickas@gmail.com>\n"
 "Language-Team: Vytux webtrees <webtrees@vytux.com>\n"
 "Language: lt\n"
@@ -63,12 +63,12 @@ msgstr ""
 # Do not translate. Already in webtrees core.
 #: module.php:297
 msgid "Description"
-msgstr "Aprašymas"
+msgstr ""
 
 # Do not translate. Already in webtrees core.
 #: module.php:313
 msgid "Source"
-msgstr "Šaltinis"
+msgstr ""
 
 #: module.php:315
 msgid "Here you can either select the webtrees media folder to display in this album page, or you can set a link to a Flickr or Picasa location for your group of images.<br><em>[Such external sources must be public or they will not be viewable in webtrees.]</em><br><br>The module will add these references to the correct URLs to link to your Flickr or Picasa sites."
@@ -94,7 +94,7 @@ msgstr "Picasa"
 # Do not translate. Already in webtrees core.
 #: module.php:342
 msgid "Folder name on server"
-msgstr "Aplanka ant serverio"
+msgstr ""
 
 #: module.php:357
 msgid "Flickr set number"
@@ -123,7 +123,7 @@ msgstr "Rodyti šį albumą šioms kalboms?"
 
 #: module.php:420
 msgid "Visibility and Access"
-msgstr ""
+msgstr "Meniu matomumas"
 
 #: module.php:424
 msgid "Album position"
@@ -148,7 +148,7 @@ msgstr "Albumo matomumas"
 # Do not translate. Already in webtrees core.
 #: module.php:452 module.php:767
 msgid "All"
-msgstr "Visi"
+msgstr ""
 
 #: module.php:456
 msgid "You can determine whether this album will be visible regardless of family tree, or whether it will be visible only to the selected family tree."
@@ -157,7 +157,7 @@ msgstr ""
 # Do not translate. Already in webtrees core.
 #: module.php:462
 msgid "Access level"
-msgstr "Prieigos lygis"
+msgstr ""
 
 # Do not translate. Already in webtrees core.
 #: module.php:472
@@ -230,7 +230,7 @@ msgstr "Išeiti iš viso ekrano rėžimo"
 # Do not translate. Already in webtrees core.
 #: module.php:866
 msgid "Next image"
-msgstr "Sekanti nuotrauka"
+msgstr ""
 
 #: module.php:867
 msgid "Previous image"
@@ -252,7 +252,7 @@ msgstr ""
 # Do not translate. Already in webtrees core.
 #: module.php:1034
 msgid "Manage links"
-msgstr "Tvarkyti nuorodas"
+msgstr ""
 
 #: module.php:1040
 msgid "Linked to:"
