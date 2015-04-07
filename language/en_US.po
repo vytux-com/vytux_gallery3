@@ -164,7 +164,6 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-# Do not translate. Already in webtrees core.
 #: module.php:476
 msgid "cancel"
 msgstr ""
