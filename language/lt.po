@@ -60,10 +60,12 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:297
 msgid "Description"
 msgstr "Aprašymas"
 
+# Do not translate. Already in webtrees core.
 #: module.php:313
 msgid "Source"
 msgstr "Šaltinis"
@@ -76,6 +78,7 @@ msgstr ""
 msgid "Gallery Source"
 msgstr "Galerijos šaltinis"
 
+# Do not translate. Already in webtrees core.
 #: module.php:324
 msgid "webtrees"
 msgstr "webtrees"
@@ -88,6 +91,7 @@ msgstr "Flickr"
 msgid "Picasa"
 msgstr "Picasa"
 
+# Do not translate. Already in webtrees core.
 #: module.php:342
 msgid "Folder name on server"
 msgstr "Aplanka ant serverio"
@@ -108,6 +112,7 @@ msgstr "Picasa naudotojas/albumas"
 msgid "For Picassa (picasaweb.google.com) enter your user name and user album, in the format <strong>username/album</strong> like <strong>kiwi3685/NZImages</strong>"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:397
 msgid "Languages"
 msgstr ""
@@ -140,6 +145,7 @@ msgstr "Kai daugiau negu vienas albumas galerijoje turi tą patį tvarkos numer�
 msgid "Album visibility"
 msgstr "Albumo matomumas"
 
+# Do not translate. Already in webtrees core.
 #: module.php:452 module.php:767
 msgid "All"
 msgstr "Visi"
@@ -221,6 +227,7 @@ msgstr "Įeiti į viso ekrano rėžimą"
 msgid "Exit fullscreen"
 msgstr "Išeiti iš viso ekrano rėžimo"
 
+# Do not translate. Already in webtrees core.
 #: module.php:866
 msgid "Next image"
 msgstr "Sekanti nuotrauka"
@@ -242,6 +249,7 @@ msgstr "Paveikslų galerijos susiėjusios su mūsų šeima"
 msgid "Edit"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:1034
 msgid "Manage links"
 msgstr "Tvarkyti nuorodas"

@@ -60,10 +60,12 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:297
 msgid "Description"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:313
 msgid "Source"
 msgstr ""
@@ -76,6 +78,7 @@ msgstr ""
 msgid "Gallery Source"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:324
 msgid "webtrees"
 msgstr ""
@@ -88,6 +91,7 @@ msgstr ""
 msgid "Picasa"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:342
 msgid "Folder name on server"
 msgstr ""
@@ -108,6 +112,7 @@ msgstr ""
 msgid "For Picassa (picasaweb.google.com) enter your user name and user album, in the format <strong>username/album</strong> like <strong>kiwi3685/NZImages</strong>"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:397
 msgid "Languages"
 msgstr ""
@@ -140,6 +145,7 @@ msgstr ""
 msgid "Album visibility"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:452 module.php:767
 msgid "All"
 msgstr ""
@@ -221,6 +227,7 @@ msgstr ""
 msgid "Exit fullscreen"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:866
 msgid "Next image"
 msgstr ""
@@ -242,6 +249,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:1034
 msgid "Manage links"
 msgstr ""
