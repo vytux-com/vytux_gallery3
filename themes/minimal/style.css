@@ -21,11 +21,6 @@
 */
 
 /* Main menu icons */
-li.vytux_gallery3 {background:url(gallery.png) no-repeat 50% 50%}
-li.vytux_gallery3 ul li {background:url(gallery-small.png) no-repeat left 0}
-html[dir=rtl] li.vytux_gallery3 ul li {background-position:right 0}
-li.vytux_gallery3 ul li.vytux_gallery3-edit {background:url(submenu_edit.png) no-repeat left 0}
-html[dir=rtl] .vytux_gallery3 ul li.vytux_gallery3-edit {background-position:right 0}
 #gallery_config {text-align:left;}
 html[dir='rtl'] #gallery_config {direction:rtl; text-align:right;}
 #gallery_config th, #gallery_config td {vertical-align:top;}
