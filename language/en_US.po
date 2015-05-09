@@ -40,36 +40,6 @@ msgstr ""
 msgid "Add album to gallery"
 msgstr ""
 
-# Do not translate. Already in webtrees core.
-#: module.php:267 module.php:712
-msgid "Control panel"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:268 module.php:713
-msgid "Module administration"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:277
-msgid "General"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:281
-msgid "Title"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:297
-msgid "Description"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:313
-msgid "Source"
-msgstr ""
-
 #: module.php:315
 msgid "Here you can either select the webtrees media folder to display in this album page, or you can set a link to a Flickr or Picasa location for your group of images.<br><em>[Such external sources must be public or they will not be viewable in webtrees.]</em><br><br>The module will add these references to the correct URLs to link to your Flickr or Picasa sites."
 msgstr ""
@@ -78,22 +48,12 @@ msgstr ""
 msgid "Gallery Source"
 msgstr ""
 
-# Do not translate. Already in webtrees core.
-#: module.php:324
-msgid "webtrees"
-msgstr ""
-
 #: module.php:329
 msgid "Flickr"
 msgstr ""
 
 #: module.php:334
 msgid "Picasa"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:342
-msgid "Folder name on server"
 msgstr ""
 
 #: module.php:357
@@ -110,11 +70,6 @@ msgstr ""
 
 #: module.php:392
 msgid "For Picassa (picasaweb.google.com) enter your user name and user album, in the format <strong>username/album</strong> like <strong>kiwi3685/NZImages</strong>"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:397
-msgid "Languages"
 msgstr ""
 
 #: module.php:401
@@ -145,37 +100,12 @@ msgstr ""
 msgid "Album visibility"
 msgstr ""
 
-# Do not translate. Already in webtrees core.
-#: module.php:452 module.php:767
-msgid "All"
-msgstr ""
-
 #: module.php:456
 msgid "You can determine whether this album will be visible regardless of family tree, or whether it will be visible only to the selected family tree."
 msgstr ""
 
-# Do not translate. Already in webtrees core.
-#: module.php:462
-msgid "Access level"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:472
-msgid "save"
-msgstr ""
-
 #: module.php:476
 msgid "cancel"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:721
-msgid "Family tree"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:729
-msgid "show"
 msgstr ""
 
 #: module.php:738
@@ -226,11 +156,6 @@ msgstr ""
 msgid "Exit fullscreen"
 msgstr ""
 
-# Do not translate. Already in webtrees core.
-#: module.php:866
-msgid "Next image"
-msgstr ""
-
 #: module.php:867
 msgid "Previous image"
 msgstr ""
@@ -241,16 +166,6 @@ msgstr ""
 
 #: module.php:990
 msgid "Image collections related to our family"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:1031
-msgid "Edit"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:1034
-msgid "Manage links"
 msgstr ""
 
 #: module.php:1040
