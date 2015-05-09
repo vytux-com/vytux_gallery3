@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_gallery3\n"
 "POT-Creation-Date: 2015-04-05 14:39+1000\n"
-"PO-Revision-Date: 2015-04-07 10:42+0300\n"
+"PO-Revision-Date: 2015-05-09 13:24+0300\n"
 "Last-Translator: Vytautas <vytautas.krivickas@gmail.com>\n"
 "Language-Team: Vytux webtrees <webtrees@vytux.com>\n"
 "Language: lt\n"
@@ -58,7 +58,7 @@ msgstr "Picasa"
 
 #: module.php:357
 msgid "Flickr set number"
-msgstr "Flickr numeris"
+msgstr "Flickr albumo numeris"
 
 #: module.php:371
 msgid "For Flickr (www.flickr.com), enter the <strong>Set</strong> number of your images, usually a long number like <strong>72157633272831222</strong>. Nothing else is required in this field."
@@ -74,7 +74,7 @@ msgstr ""
 
 #: module.php:401
 msgid "Show this album for which languages?"
-msgstr "Rodyti šį albumą šioms kalboms?"
+msgstr "Kuriom kalbom rodyti šį albumą?"
 
 #: module.php:420
 msgid "Visibility and Access"
@@ -106,11 +106,11 @@ msgstr ""
 
 #: module.php:476
 msgid "cancel"
-msgstr ""
+msgstr "atšaukti"
 
 #: module.php:738
 msgid "Add Gallery"
-msgstr ""
+msgstr "Sukurti Galeriją"
 
 #: module.php:747
 msgid "ReadMe"
