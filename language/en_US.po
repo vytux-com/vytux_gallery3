@@ -2,176 +2,176 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_gallery3\n"
 "POT-Creation-Date: 2015-04-05 14:38+1000\n"
-"PO-Revision-Date: 2015-04-05 14:38+1000\n"
-"Last-Translator: Vytautas Krivickas <vytautas.krivickas@gmail.com>\n"
+"PO-Revision-Date: 2015-05-09 13:35+0300\n"
+"Last-Translator: Vytautas <vytautas.krivickas@gmail.com>\n"
 "Language-Team: Vytux webtrees <webtrees@vytux.com>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.3-dev\n"
 "X-Poedit-KeywordsList: translate;noop;plural:1,2\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: module.php:38
 msgid "Vytux Gallery 3"
-msgstr ""
+msgstr "Vytux Gallery 3"
 
 #: module.php:42
 msgid "Gallery"
-msgstr ""
+msgstr "Gallery"
 
 #: module.php:47
 msgid "Display image galleries."
-msgstr ""
+msgstr "Display image galleries."
 
 #: module.php:123
 msgid "Edit albums"
-msgstr ""
+msgstr "Edit albums"
 
 #: module.php:204
 msgid "Edit album"
-msgstr ""
+msgstr "Edit album"
 
 #: module.php:220
 msgid "Add album to gallery"
-msgstr ""
+msgstr "Add album to gallery"
 
 #: module.php:315
 msgid "Here you can either select the webtrees media folder to display in this album page, or you can set a link to a Flickr or Picasa location for your group of images.<br><em>[Such external sources must be public or they will not be viewable in webtrees.]</em><br><br>The module will add these references to the correct URLs to link to your Flickr or Picasa sites."
-msgstr ""
+msgstr "Here you can either select the webtrees media folder to display in this album page, or you can set a link to a Flickr or Picasa location for your group of images.<br><em>[Such external sources must be public or they will not be viewable in webtrees.]</em><br><br>The module will add these references to the correct URLs to link to your Flickr or Picasa sites."
 
 #: module.php:319
 msgid "Gallery Source"
-msgstr ""
+msgstr "Gallery Source"
 
 #: module.php:329
 msgid "Flickr"
-msgstr ""
+msgstr "Flickr"
 
 #: module.php:334
 msgid "Picasa"
-msgstr ""
+msgstr "Picasa"
 
 #: module.php:357
 msgid "Flickr set number"
-msgstr ""
+msgstr "Flickr set number"
 
 #: module.php:371
 msgid "For Flickr (www.flickr.com), enter the <strong>Set</strong> number of your images, usually a long number like <strong>72157633272831222</strong>. Nothing else is required in this field."
-msgstr ""
+msgstr "For Flickr (www.flickr.com), enter the <strong>Set</strong> number of your images, usually a long number like <strong>72157633272831222</strong>. Nothing else is required in this field."
 
 #: module.php:378
 msgid "Picasa user/album"
-msgstr ""
+msgstr "Picasa user/album"
 
 #: module.php:392
 msgid "For Picassa (picasaweb.google.com) enter your user name and user album, in the format <strong>username/album</strong> like <strong>kiwi3685/NZImages</strong>"
-msgstr ""
+msgstr "For Picassa (picasaweb.google.com) enter your user name and user album, in the format <strong>username/album</strong> like <strong>kiwi3685/NZImages</strong>"
 
 #: module.php:401
 msgid "Show this album for which languages?"
-msgstr ""
+msgstr "Show this album for which languages?"
 
 #: module.php:420
 msgid "Visibility and Access"
-msgstr ""
+msgstr "Visibility and Access"
 
 #: module.php:424
 msgid "Album position"
-msgstr ""
+msgstr "Album position"
 
 #: module.php:439
 msgid "This field controls the order in which the gallery albums are displayed."
-msgstr ""
+msgstr "This field controls the order in which the gallery albums are displayed."
 
 #: module.php:441
 msgid "You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other albums later. For example, if you use the numbers 1, 6, 11, 16, you can later insert albums with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert albums in front of the first one."
-msgstr ""
+msgstr "You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other albums later. For example, if you use the numbers 1, 6, 11, 16, you can later insert albums with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert albums in front of the first one."
 
 #: module.php:443
 msgid "When more than one gallery album has the same position number, only one of these albums will be visible."
-msgstr ""
+msgstr "When more than one gallery album has the same position number, only one of these albums will be visible."
 
 #: module.php:449
 msgid "Album visibility"
-msgstr ""
+msgstr "Album visibility"
 
 #: module.php:456
 msgid "You can determine whether this album will be visible regardless of family tree, or whether it will be visible only to the selected family tree."
-msgstr ""
+msgstr "You can determine whether this album will be visible regardless of family tree, or whether it will be visible only to the selected family tree."
 
 #: module.php:476
 msgid "cancel"
-msgstr ""
+msgstr "cancel"
 
 #: module.php:738
 msgid "Add Gallery"
-msgstr ""
+msgstr "Add Gallery"
 
 #: module.php:747
 msgid "ReadMe"
-msgstr ""
+msgstr "ReadMe"
 
 #: module.php:756
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #: module.php:757
 msgid "Album title"
-msgstr ""
+msgstr "Album title"
 
 #: module.php:758
 msgid "Controls"
-msgstr ""
+msgstr "Controls"
 
 #: module.php:804
 msgid "Are you sure you want to delete this album?"
-msgstr ""
+msgstr "Are you sure you want to delete this album?"
 
 #: module.php:860
 msgid "Show descriptions"
-msgstr ""
+msgstr "Show descriptions"
 
 #: module.php:861
 msgid "Hide descriptions"
-msgstr ""
+msgstr "Hide descriptions"
 
 #: module.php:862
 msgid "Play slideshow"
-msgstr ""
+msgstr "Play slideshow"
 
 #: module.php:863
 msgid "Pause slideshow"
-msgstr ""
+msgstr "Pause slideshow"
 
 #: module.php:864
 msgid "Enter fullscreen"
-msgstr ""
+msgstr "Enter fullscreen"
 
 #: module.php:865
 msgid "Exit fullscreen"
-msgstr ""
+msgstr "Exit fullscreen"
 
 #: module.php:867
 msgid "Previous image"
-msgstr ""
+msgstr "Previous image"
 
 #: module.php:952
 msgid "Picture galleries"
-msgstr ""
+msgstr "Picture galleries"
 
 #: module.php:990
 msgid "Image collections related to our family"
-msgstr ""
+msgstr "Image collections related to our family"
 
 #: module.php:1040
 msgid "Linked to:"
-msgstr ""
+msgstr "Linked to:"
 
 #: module.php:1074
 msgid "Album is empty. Please choose other album."
-msgstr ""
+msgstr "Album is empty. Please choose other album."
