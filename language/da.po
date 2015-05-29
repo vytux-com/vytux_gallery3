@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_gallery3\n"
 "POT-Creation-Date: 2015-04-05 14:38+1000\n"
-"PO-Revision-Date: 2015-05-29 10:25+0300\n"
-"Last-Translator: Vytautas Krivickas <vytautas.krivickas@gmail.com>\n"
+"PO-Revision-Date: 2015-05-29 10:27+0300\n"
+"Last-Translator: Jamie <jaco_fyn@hotmail.com>\n"
 "Language-Team: none\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -130,19 +130,19 @@ msgstr "Kontroller"
 
 #: module.php:804
 msgid "Are you sure you want to delete this album?"
-msgstr ""
+msgstr "Er du sikker på du ønsker at slette?"
 
 #: module.php:860
 msgid "Show descriptions"
-msgstr ""
+msgstr "Vis beskrivelse"
 
 #: module.php:861
 msgid "Hide descriptions"
-msgstr ""
+msgstr "Skjul beskrivelse"
 
 #: module.php:862
 msgid "Play slideshow"
-msgstr ""
+msgstr "Afspil diasshow"
 
 #: module.php:863
 msgid "Pause slideshow"
@@ -150,28 +150,28 @@ msgstr "Pause slideshow"
 
 #: module.php:864
 msgid "Enter fullscreen"
-msgstr ""
+msgstr "Aktiver Fuldskærm"
 
 #: module.php:865
 msgid "Exit fullscreen"
-msgstr ""
+msgstr "Afslut fuldskærm"
 
 #: module.php:867
 msgid "Previous image"
-msgstr ""
+msgstr "Forrige billede"
 
 #: module.php:952
 msgid "Picture galleries"
-msgstr ""
+msgstr "Billedgallerier"
 
 #: module.php:990
 msgid "Image collections related to our family"
-msgstr ""
+msgstr "Familierelateret billedsamling"
 
 #: module.php:1040
 msgid "Linked to:"
-msgstr ""
+msgstr "Linket til:"
 
 #: module.php:1074
 msgid "Album is empty. Please choose other album."
-msgstr ""
+msgstr "Album er tomt. Vælg et andet album."
