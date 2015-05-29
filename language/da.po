@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_gallery3\n"
 "POT-Creation-Date: 2015-04-05 14:38+1000\n"
-"PO-Revision-Date: 2015-05-29 10:22+0300\n"
-"Last-Translator: Vytautas Krivickas <vytautas.krivickas@gmail.com>\n"
+"PO-Revision-Date: 2015-05-29 10:25+0300\n"
+"Last-Translator: Jamie <jaco_fyn@hotmail.com>\n"
 "Language-Team: none\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -22,31 +22,31 @@ msgstr "Vytux Galleri 3"
 
 #: module.php:42
 msgid "Gallery"
-msgstr ""
+msgstr "Galleri"
 
 #: module.php:47
 msgid "Display image galleries."
-msgstr ""
+msgstr "Vis billed gallerier"
 
 #: module.php:123
 msgid "Edit albums"
-msgstr ""
+msgstr "Redigér album"
 
 #: module.php:204
 msgid "Edit album"
-msgstr ""
+msgstr "Redigér album"
 
 #: module.php:220
 msgid "Add album to gallery"
-msgstr ""
+msgstr "Tilføj album"
 
 #: module.php:315
 msgid "Here you can either select the webtrees media folder to display in this album page, or you can set a link to a Flickr or Picasa location for your group of images.<br><em>[Such external sources must be public or they will not be viewable in webtrees.]</em><br><br>The module will add these references to the correct URLs to link to your Flickr or Picasa sites."
-msgstr ""
+msgstr "Her kan du enten vælge at vise en webtrees medie mappe eller du kan sætte et link til Flickr eller Picasa til en gruppe billeder <br><em>[Denne eksterne kilde skal være sat til offentlig visning ellers vil de ikke kunne vises i webtrees</em><br><br> Modulet vil oprette disse referencer med den korrekte URL linket til dine Flickr eller Picasa sider."
 
 #: module.php:319
 msgid "Gallery Source"
-msgstr ""
+msgstr "Galleri Kilde"
 
 #: module.php:329
 msgid "Flickr"
@@ -58,15 +58,15 @@ msgstr "Picasa"
 
 #: module.php:357
 msgid "Flickr set number"
-msgstr ""
+msgstr "Flickr sæt nummer"
 
 #: module.php:371
 msgid "For Flickr (www.flickr.com), enter the <strong>Set</strong> number of your images, usually a long number like <strong>72157633272831222</strong>. Nothing else is required in this field."
-msgstr ""
+msgstr "For Flickr (www.flickr.com), indtast <strong>nummerref </strong> på dine billeder, som normal er et langt nummer som <strong>72157633272831222</strong>. Intet andet er påkrævet for dette felt"
 
 #: module.php:378
 msgid "Picasa user/album"
-msgstr ""
+msgstr "Picasa bruger/album"
 
 #: module.php:392
 msgid "For Picassa (picasaweb.google.com) enter your user name and user album, in the format <strong>username/album</strong> like <strong>kiwi3685/NZImages</strong>"
@@ -74,11 +74,11 @@ msgstr ""
 
 #: module.php:401
 msgid "Show this album for which languages?"
-msgstr ""
+msgstr "Vælg sprog"
 
 #: module.php:420
 msgid "Visibility and Access"
-msgstr ""
+msgstr "Synlighed og Adgang"
 
 #: module.php:424
 msgid "Album position"
@@ -86,7 +86,7 @@ msgstr "Album position"
 
 #: module.php:439
 msgid "This field controls the order in which the gallery albums are displayed."
-msgstr ""
+msgstr "Vælg sorteringsorden"
 
 #: module.php:441
 msgid "You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other albums later. For example, if you use the numbers 1, 6, 11, 16, you can later insert albums with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert albums in front of the first one."
@@ -94,23 +94,23 @@ msgstr ""
 
 #: module.php:443
 msgid "When more than one gallery album has the same position number, only one of these albums will be visible."
-msgstr ""
+msgstr "Hvis mere end ét album har samme positionsnummer, vil kun ét af disse album blive vist."
 
 #: module.php:449
 msgid "Album visibility"
-msgstr ""
+msgstr "Synlighed"
 
 #: module.php:456
 msgid "You can determine whether this album will be visible regardless of family tree, or whether it will be visible only to the selected family tree."
-msgstr ""
+msgstr "Du kan beslutte om album skal vises uanset familietræ eller kun for det aktuelle familietræ"
 
 #: module.php:476
 msgid "cancel"
-msgstr ""
+msgstr "fortryd"
 
 #: module.php:738
 msgid "Add Gallery"
-msgstr ""
+msgstr "Opret Galleri"
 
 #: module.php:747
 msgid "ReadMe"
