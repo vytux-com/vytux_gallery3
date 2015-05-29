@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: vytux_gallery3\n"
 "POT-Creation-Date: 2015-04-05 14:38+1000\n"
 "PO-Revision-Date: 2015-05-29 10:25+0300\n"
-"Last-Translator: Vytautas Krivickas <vytautas.krivickas@gmail.com>\n"
+"Last-Translator: Jamie <jaco_fyn@hotmail.com>\n"
 "Language-Team: none\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -118,11 +118,11 @@ msgstr "Læs mig"
 
 #: module.php:756
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #: module.php:757
 msgid "Album title"
-msgstr ""
+msgstr "Album titel"
 
 #: module.php:758
 msgid "Controls"
