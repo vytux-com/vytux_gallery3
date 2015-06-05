@@ -27,7 +27,7 @@ namespace Vytux\webtrees_vytux_gallery3;
 use PDO;
 use Fisharebest\Webtrees as webtrees;
 
-class VytuxGallery3Module extends webtrees\AbstractModule implements webtrees\ModuleBlockInterface, webtrees\ModuleConfigInterface, webtrees\ModuleMenuInterface  {
+class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webtrees\Module\ModuleBlockInterface, webtrees\Module\ModuleConfigInterface, webtrees\Module\ModuleMenuInterface  {
 
 	public function __construct() {
 		parent::__construct('vytux_gallery3');
@@ -198,7 +198,7 @@ class VytuxGallery3Module extends webtrees\AbstractModule implements webtrees\Mo
 			$this->config();
 		} else {
 			$block_id = webtrees\Filter::get('block_id');
-			$controller = new webtrees\PageController();
+			$controller = new webtrees\Controller\PageController();
             $controller->restrictAccess(webtrees\Auth::isEditor($WT_TREE));
 			if ($block_id) {
 				$controller->setPageTitle(webtrees\I18N::translate('Edit album'));
@@ -259,7 +259,7 @@ class VytuxGallery3Module extends webtrees\AbstractModule implements webtrees\Mo
 				');
 			
 			if (webtrees\Module::getModuleByName('ckeditor')) {
-				webtrees\CkeditorModule::enableEditor($controller);
+				webtrees\Module\CkeditorModule::enableEditor($controller);
 			}
 			?>
 			
@@ -346,7 +346,7 @@ class VytuxGallery3Module extends webtrees\AbstractModule implements webtrees\Mo
 								<span class="input-group-addon">
 									<?php echo WT_DATA_DIR, $MEDIA_DIRECTORY; ?>
 								</span>
-								<?php echo webtrees\select_edit_control('album_folder_w', webtrees\QueryMedia::folderList(), null, htmlspecialchars($item_folder_w), 'class="form-control"'); ?>
+								<?php echo select_edit_control('album_folder_w', webtrees\Query\QueryMedia::folderList(), null, htmlspecialchars($item_folder_w), 'class="form-control"'); ?>
 							</div>
 						</div>
 					</div>
@@ -448,7 +448,7 @@ class VytuxGallery3Module extends webtrees\AbstractModule implements webtrees\Mo
 						<?php echo webtrees\I18N::translate('Album visibility'); ?>
 					</label>
 					<div class="col-sm-9">
-						<?php echo webtrees\select_edit_control('gedcom_id', webtrees\Tree::getIdList(), webtrees\I18N::translate('All'), $gedcom_id, 'class="form-control"'); ?>
+						<?php echo select_edit_control('gedcom_id', webtrees\Tree::getIdList(), webtrees\I18N::translate('All'), $gedcom_id, 'class="form-control"'); ?>
 					</div>
 					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
 						<?php 
@@ -461,7 +461,7 @@ class VytuxGallery3Module extends webtrees\AbstractModule implements webtrees\Mo
 						<?php echo webtrees\I18N::translate('Access level'); ?>
 					</label>
 					<div class="col-sm-9">
-						<?php echo webtrees\edit_field_access_level('album_access', $item_access, 'class="form-control"'); ?>
+						<?php echo edit_field_access_level('album_access', $item_access, 'class="form-control"'); ?>
 					</div>
 				</div>
 				
@@ -593,7 +593,7 @@ class VytuxGallery3Module extends webtrees\AbstractModule implements webtrees\Mo
 	private function config() {
 		global $WT_TREE;
 		
-		$controller = new webtrees\PageController();
+		$controller = new webtrees\Controller\PageController();
 		$controller
 			->restrictAccess(webtrees\Auth::isManager($WT_TREE))
 			->setPageTitle($this->getTitle())
@@ -722,7 +722,7 @@ class VytuxGallery3Module extends webtrees\AbstractModule implements webtrees\Mo
 					<input type="hidden" name="mod" value="<?php echo  $this->getName(); ?>">
 					<input type="hidden" name="mod_action" value="admin_config">
 					<div class="col-sm-9 col-xs-9" style="padding:0;">
-						<?php echo webtrees\select_edit_control('ged', webtrees\Tree::getNameList(), null, $WT_TREE->getName(), 'class="form-control"'); ?>
+						<?php echo select_edit_control('ged', webtrees\Tree::getNameList(), null, $WT_TREE->getName(), 'class="form-control"'); ?>
 					</div>
 					<div class="col-sm-3" style="padding:0;">
 						<input type="submit" class="btn btn-primary" value="<?php echo webtrees\I18N::translate('show'); ?>">
@@ -933,7 +933,7 @@ class VytuxGallery3Module extends webtrees\AbstractModule implements webtrees\Mo
 		$before   = substr($haystack, 0, strpos($haystack, $needle));
 		$after    = substr(strstr($haystack, $needle), strlen($needle));
 		$final    = $before.$needle.$after;
-		$notes    = webtrees\print_fact_notes($final, 1, true, true);
+		$notes    = print_fact_notes($final, 1, true, true);
 		if ($notes != '' && $notes != '<br>') {
 			$html = htmlspecialchars($notes);
 			return $html;
@@ -946,7 +946,7 @@ class VytuxGallery3Module extends webtrees\AbstractModule implements webtrees\Mo
 		global $MEDIA_DIRECTORY, $controller, $WT_TREE;
 		$gallery_header_description = '';
 		$item_id = webtrees\Filter::get('album_id');
-		$controller = new webtrees\PageController();
+		$controller = new webtrees\Controller\PageController();
 		$controller
 			->setPageTitle(webtrees\I18N::translate('Picture galleries'))
 			->pageHeader()
