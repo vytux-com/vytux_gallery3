@@ -933,7 +933,7 @@ class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webt
 		$before   = substr($haystack, 0, strpos($haystack, $needle));
 		$after    = substr(strstr($haystack, $needle), strlen($needle));
 		$final    = $before.$needle.$after;
-		$notes    = print_fact_notes($final, 1, true, true);
+		$notes    = webtrees\Functions\FunctionsPrint::printFactNotes($final, 1, true, true);
 		if ($notes != '' && $notes != '<br>') {
 			$html = htmlspecialchars($notes);
 			return $html;
