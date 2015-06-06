@@ -346,7 +346,7 @@ class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webt
 								<span class="input-group-addon">
 									<?php echo WT_DATA_DIR, $MEDIA_DIRECTORY; ?>
 								</span>
-								<?php echo select_edit_control('album_folder_w', webtrees\Query\QueryMedia::folderList(), null, htmlspecialchars($item_folder_w), 'class="form-control"'); ?>
+								<?php echo webtrees\Functions\FunctionsEdit::selectEditControl('album_folder_w', webtrees\Query\QueryMedia::folderList(), null, htmlspecialchars($item_folder_w), 'class="form-control"'); ?>
 							</div>
 						</div>
 					</div>
@@ -448,7 +448,7 @@ class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webt
 						<?php echo webtrees\I18N::translate('Album visibility'); ?>
 					</label>
 					<div class="col-sm-9">
-						<?php echo select_edit_control('gedcom_id', webtrees\Tree::getIdList(), webtrees\I18N::translate('All'), $gedcom_id, 'class="form-control"'); ?>
+						<?php echo webtrees\Functions\FunctionsEdit::selectEditControl('gedcom_id', webtrees\Tree::getIdList(), webtrees\I18N::translate('All'), $gedcom_id, 'class="form-control"'); ?>
 					</div>
 					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
 						<?php 
@@ -461,7 +461,7 @@ class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webt
 						<?php echo webtrees\I18N::translate('Access level'); ?>
 					</label>
 					<div class="col-sm-9">
-						<?php echo edit_field_access_level('album_access', $item_access, 'class="form-control"'); ?>
+						<?php echo webtrees\Functions\FunctionsEdit::editFieldAccessLevel('album_access', $item_access, 'class="form-control"'); ?>
 					</div>
 				</div>
 				
@@ -722,7 +722,7 @@ class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webt
 					<input type="hidden" name="mod" value="<?php echo  $this->getName(); ?>">
 					<input type="hidden" name="mod_action" value="admin_config">
 					<div class="col-sm-9 col-xs-9" style="padding:0;">
-						<?php echo select_edit_control('ged', webtrees\Tree::getNameList(), null, $WT_TREE->getName(), 'class="form-control"'); ?>
+						<?php echo webtrees\Functions\FunctionsEdit::selectEditControl('ged', webtrees\Tree::getNameList(), null, $WT_TREE->getName(), 'class="form-control"'); ?>
 					</div>
 					<div class="col-sm-3" style="padding:0;">
 						<input type="submit" class="btn btn-primary" value="<?php echo webtrees\I18N::translate('show'); ?>">
