@@ -35,6 +35,11 @@ html[dir='rtl'] #page-create {float:right;}
 #file-list{background:oldLace; border:1px inset #D9D6C4; padding:0 10px; float:left; margin:0 40px; min-height:150px}
 html[dir='rtl'] #file-list {float:right;}
 
+/* Mobile low resolution viewport */
+@media (max-width: 600px) {
+	li.vytux_gallery3 {background:url(gallery-mobile.png) no-repeat 50% 50%}
+}
+
 /* Gallery styling */
 #outer_gallery_container {overflow:hidden;}
 #gallery-page {width:80%; margin:0 auto;}
