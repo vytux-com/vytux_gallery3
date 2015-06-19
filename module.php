@@ -109,7 +109,7 @@ class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webt
 		}
 
 		//-- main GALLERIES menu item
-		$menu = new webtrees\Menu($this->getMenuTitle(), 'module.php?mod=' . $this->getName() . '&amp;mod_action=show&amp;album_id=' . $default_block, $this->getName(), 'down');
+		$menu = new webtrees\Menu($this->getMenuTitle(), 'module.php?mod=' . $this->getName() . '&amp;mod_action=show&amp;album_id=' . $default_block, $this->getName());
 		$menu->addClass('menuitem', 'menuitem_hover', '');
 		foreach ($this->getMenuAlbumList() as $item) {
 			$languages = $this->getBlockSetting($item->block_id, 'languages');
