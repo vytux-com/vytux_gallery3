@@ -187,7 +187,7 @@ class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webt
 			$this->setBlockSetting($block_id, 'album_access',	   webtrees\Filter::post('album_access'));
 			$this->setBlockSetting($block_id, 'plugin',			   webtrees\Filter::post('plugin'));
 			$languages = array();
-			foreach (webtrees\I18N::installedLocales() as $locale) {
+			foreach (webtrees\I18N::activeLocales() as $locale) {
 				$code = $locale->languageTag();
 				$name = $locale->endonym();
 				if (webtrees\Filter::postBool('lang_'.$code)) {
@@ -403,7 +403,7 @@ class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webt
 					<div class="col-sm-9">
 						<?php 
 							$accepted_languages=explode(',', $this->getBlockSetting($block_id, 'languages'));
-							foreach (webtrees\I18N::installedLocales() as $locale) {
+							foreach (webtrees\I18N::activeLocales() as $locale) {
 						?>
 								<div class="checkbox">
 									<label title="<?php echo $locale->languageTag(); ?>">
