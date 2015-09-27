@@ -997,6 +997,79 @@ class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webt
 			<?php
 	}
 
+	/**
+	 * get gedcom tag value
+	 *
+	 * @param string  $tag    The tag to find, use : to delineate subtags
+	 * @param int $level  The gedcom line level of the first tag to find, setting level to 0 will cause it to use 1+ the level of the incoming record
+	 * @param string  $gedrec The gedcom record to get the value from
+	 *
+	 * @return string the value of a gedcom tag from the given gedcom record
+	 */
+	private function getGedcomValue($tag, $level, $gedrec) {
+		global $WT_TREE;
+		if (empty($gedrec)) {
+			return '';
+		}
+		$tags      = explode(':', $tag);
+		$origlevel = $level;
+		if ($level == 0) {
+			$level = $gedrec{0} + 1;
+		}
+		$subrec = $gedrec;
+		foreach ($tags as $t) {
+			$lastsubrec = $subrec;
+			$subrec     = webtrees\Functions\Functions::getSubRecord($level, "$level $t", $subrec);
+			if (empty($subrec) && $origlevel == 0) {
+				$level--;
+				$subrec = webtrees\Functions\Functions::getSubRecord($level, "$level $t", $lastsubrec);
+			}
+			if (empty($subrec)) {
+				if ($t == "TITL") {
+					$subrec = webtrees\Functions\Functions::getSubRecord($level, "$level ABBR", $lastsubrec);
+					if (!empty($subrec)) {
+						$t = "ABBR";
+					}
+				}
+				if (empty($subrec)) {
+					if ($level > 0) {
+						$level--;
+					}
+					$subrec = webtrees\Functions\Functions::getSubRecord($level, "@ $t", $gedrec);
+					if (empty($subrec)) {
+						return '';
+					}
+				}
+			}
+			$level++;
+		}
+		$level--;
+		$ct = preg_match("/$level $t(.*)/", $subrec, $match);
+		if ($ct == 0) {
+			$ct = preg_match("/$level @.+@ (.+)/", $subrec, $match);
+		}
+		if ($ct == 0) {
+			$ct = preg_match("/@ $t (.+)/", $subrec, $match);
+		}
+		if ($ct > 0) {
+			$value = trim($match[1]);
+			if ($t == 'NOTE' && preg_match('/^@(.+)@$/', $value, $match)) {
+				$note = webtrees\Note::getInstance($match[1], $WT_TREE);
+				if ($note) {
+					$value = $note->getNote();
+				} else {
+					//-- set the value to the id without the @
+					$value = $match[1];
+				}
+			}
+			if ($level != 0 || $t != "NOTE") {
+				$value .= webtrees\Functions\Functions::getCont($level + 1, $subrec);
+			}
+			return $value;
+		}
+		return "";
+	}
+
 	// Print the gallery display
 	private function mediaDisplay($sub_folder, $item_id) {
 		global $MEDIA_DIRECTORY, $WT_TREE;
@@ -1017,7 +1090,7 @@ class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webt
 						$media->linkedSources('OBJE')
 					);
 					$rawTitle = $rowm['m_titl'];
-					if (empty($rawTitle)) $rawTitle = get_gedcom_value('TITL', 2, $rowm['m_gedcom']);
+					if (empty($rawTitle)) $rawTitle = $this->getGedcomValue('TITL', 2, $rowm['m_gedcom']);
 					if (empty($rawTitle)) $rawTitle = basename($rowm['m_filename']);
 					$mediaTitle = htmlspecialchars(strip_tags($rawTitle));
 					$rawUrl = $media->getHtmlUrlDirect();
