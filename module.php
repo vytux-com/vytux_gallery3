@@ -29,6 +29,9 @@ use Fisharebest\Webtrees as webtrees;
 
 class VytuxGallery3Module extends webtrees\Module\AbstractModule implements webtrees\Module\ModuleBlockInterface, webtrees\Module\ModuleConfigInterface, webtrees\Module\ModuleMenuInterface  {
 
+    const CUSTOM_VERSION = '1.7.5';
+    const CUSTOM_WEBSITE = 'https://vytux.com/main/projects/webtrees/vytux_gallery3/';
+
 	public function __construct() {
 		parent::__construct('vytux_gallery3');
 	}
